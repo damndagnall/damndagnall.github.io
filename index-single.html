@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tasman Escape</title>
+  <meta name="description" content="Tasman Escape — an eco-friendly retreat on Tasmania’s Tasman Peninsula.">
+  <style>
+    /* Embedded styles for single-file version */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0f1c24;
+      color: #f5f5f5;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { padding-left: 1.1rem; }
+    :root {
+      --bg: #0f1c24;
+      --bg-alt: #142a34;
+      --card-bg: #1c3040;
+      --text-light: #f5f5f5;
+      --text-muted: #93a7b5;
+      --primary: #d4b16a;
+      --border: rgba(255,255,255,0.08);
+      --radius: 14px;
+      --max-width: 1120px;
+    }
+    .container { width: min(92vw, var(--max-width)); margin-inline: auto; }
+    .skip { position: absolute; left: -999px; top: auto; background: var(--bg-alt); padding: .6rem 1rem; border-radius: var(--radius); z-index: 9999; }
+    .skip:focus { left: 1rem; top: 1rem; }
+    .header { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); border-bottom: 1px solid var(--border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: .9rem 0; position: relative; }
+    .logo { font-weight: 700; letter-spacing: .5px; font-size: 1.3rem; color: var(--primary); }
+    .nav-menu { display: flex; align-items: center; gap: 1rem; }
+    .nav-menu a { opacity: .85; color: var(--text-muted); transition: color .3s, opacity .3s; }
+    .nav-menu a:hover { color: var(--primary); opacity: 1; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius); font-weight: 600; cursor: pointer; text-decoration: none; transition: background-color .3s, color .3s, border-color .3s; }
+    .btn-small { padding: .45rem .8rem; font-size: .9rem; }
+    .btn-primary { background-color: var(--primary); color: var(--bg); padding: .75rem 1.4rem; border: 1px solid var(--primary); }
+    .btn-primary:hover { background-color: #caa763; }
+    .btn-secondary { background-color: transparent; color: var(--primary); border: 1px solid var(--primary); padding: .75rem 1.4rem; }
+    .btn-secondary:hover { background-color: var(--primary); color: var(--bg); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; width: 1.8rem; height: 1.2rem; position: relative; }
+    .nav-toggle .hamburger, .nav-toggle .hamburger::before, .nav-toggle .hamburger::after { display: block; width: 100%; height: 2px; background: var(--text-light); position: absolute; left: 0; transition: transform .3s; }
+    .nav-toggle .hamburger { top: 50%; transform: translateY(-50%); }
+    .nav-toggle .hamburger::before { content: ""; top: -6px; }
+    .nav-toggle .hamburger::after { content: ""; top: 6px; }
+
+    /* When menu is open, rotate bars to form a cross */
+    .nav-toggle.open .hamburger {
+      transform: rotate(45deg);
+    }
+    .nav-toggle.open .hamburger::before {
+      top: 0;
+      transform: rotate(90deg);
+    }
+    .nav-toggle.open .hamburger::after {
+      top: 0;
+      opacity: 0;
+    }
+
+    /* sr-only utility class to hide text visually but keep it accessible */
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    .hero { position: relative; height: 80vh; min-height: 520px; background-image: url('data:image/jpeg;base64,${b64}'); background-size: cover; background-position: center; display: flex; align-items: center; }
+    .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.5); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; text-align: center; width: 100%; }
+    .subheading { font-size: .85rem; text-transform: uppercase; letter-spacing: .15rem; color: var(--primary); margin-bottom: .8rem; }
+    .hero-title { font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.15; font-weight: 700; margin-bottom: .6rem; }
+    .hero-tagline { font-size: 1.2rem; color: var(--text-muted); max-width: 60ch; margin-inline: auto; margin-bottom: 2rem; }
+    .section { padding: 3rem 0; }
+    .section-alt { background-color: var(--bg-alt); }
+    .section-head { margin-bottom: 1.2rem; }
+    .section-head h2 { font-size: 2rem; margin-bottom: .4rem; }
+    .section-description { color: var(--text-muted); max-width: 65ch; }
+    .small-text { font-size: .85rem; color: var(--text-muted); }
+    .grid { display: grid; gap: 1.4rem; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card { background-color: var(--card-bg); padding: 1.4rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 12px 28px rgba(0,0,0,.22); }
+    .card-row { display: flex; gap: 1rem; align-items: flex-start; }
+    .icon { font-size: 2rem; width: 2.6rem; display: grid; place-items: center; color: var(--primary); flex-shrink: 0; }
+    .list { margin-top: .6rem; color: var(--text-muted); }
+    .list li { margin-bottom: .35rem; }
+    .gallery-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .gallery-placeholder { height: 150px; border: 2px dashed var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text-muted); background-color: var(--card-bg); }
+    .map-placeholder { height: 220px; border-radius: var(--radius); border: 2px dashed var(--border); background-color: var(--card-bg); margin-top: .8rem; }
+    .book-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start; }
+    .button-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+    .form { display: grid; gap: 1rem; }
+    label { display: grid; gap: .4rem; font-weight: 600; }
+    input, textarea { width: 100%; padding: .75rem 1rem; border-radius: var(--radius); border: 1px solid var(--border); background: rgba(255,255,255,.05); color: var(--text-light); }
+    input:focus, textarea:focus { outline: 2px solid var(--primary); }
+    .footer { border-top: 1px solid var(--border); background-color: var(--bg-alt); padding: 1.6rem 0; }
+    .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+    .footer-links { display: flex; gap: 1rem; }
+    .footer-links a { color: var(--text-muted); transition: color .3s; }
+    .footer-links a:hover { color: var(--primary); }
+
+    /* Social feed widget placeholder */
+    .social-widget {
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      background-color: var(--card-bg);
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* Map container ensures iframes remain responsive */
+    .map-container iframe {
+      width: 100%;
+      border-radius: var(--radius);
+    }
+    @media (max-width: 900px) {
+      .nav-menu { position: absolute; right: 1rem; top: 100%; background-color: var(--bg-alt); flex-direction: column; align-items: flex-start; gap: .8rem; padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 8px 16px rgba(0,0,0,.4); min-width: 220px; display: none; z-index: 1000; }
+      .nav-menu.open { display: flex; }
+      .nav-toggle { display: inline-flex; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="header">
+    <nav class="nav container">
+      <a href="#" class="logo">Tasman&nbsp;Escape</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="sr-only">Menu</span>
+        <span class="hamburger"></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="#stay">The stay</a>
+        <a href="#adventures">Adventures</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#location">Location</a>
+        <a class="btn btn-small" href="#book">Book</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content container">
+        <p class="subheading">Tasman Peninsula • Tasmania</p>
+        <h1 class="hero-title">Discover Tasmania’s Hidden Gems</h1>
+        <p class="hero-tagline">Explore nature sustainably with Tasman Escape</p>
+        <a href="#stay" class="btn btn-primary">Find out more</a>
+      </div>
+    </section>
+
+    <!-- Social feed: latest #TasmanPeninsula posts -->
+    <section class="section" id="social">
+      <div class="container">
+        <div class="section-head">
+          <h2>Latest #TasmanPeninsula</h2>
+          <p class="section-description">See what others are sharing from around the Tasman Peninsula. Replace this placeholder with a real social feed widget for Instagram or X.</p>
+        </div>
+        <!-- Placeholder for social feed. To embed a live hashtag feed, sign up for a free Instagram hashtag widget (e.g. SnapWidget, Elfsight or Curator.io) and paste the provided iframe below. -->
+        <div class="social-widget">
+          <p class="small-text">Embed your hashtag feed widget here. For example, using SnapWidget or Taggbox with the tag “TasmanPeninsula”.</p>
+          <!-- Example embed (replace src with your widget URL) -->
+          <!--
+          <iframe src="https://snapwidget.com/embed/your-widget-id" style="border:none;overflow:hidden" width="100%" height="400" scrolling="no" allowtransparency="true"></iframe>
+          -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stay">
+      <div class="container">
+        <div class="section-head">
+          <h2>The stay</h2>
+          <p class="section-description">Simple, comfortable and practical — with the details that make a getaway feel effortless.</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Comfort &amp; calm</h3>
+            <p>Cosy sleeping, hot shower, quality linens, and a space that feels private and quiet.</p>
+            <ul class="list">
+              <li>Fresh towels + toiletries</li>
+              <li>Heating/cooling</li>
+              <li>Board games + books</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Eat well</h3>
+            <p>A proper kitchen setup for coffee rituals, big breakfasts and post‑adventure meals.</p>
+            <ul class="list">
+              <li>Full kitchen basics</li>
+              <li>Tea/coffee station</li>
+              <li>Outdoor dining (optional)</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Stay connected (or don’t)</h3>
+            <p>Good for a clean digital detox — with the option to plug in when needed.</p>
+            <ul class="list">
+              <li>Wi‑Fi (if available)</li>
+              <li>Desk/work nook (optional)</li>
+              <li>Local guides + maps</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="adventures">
+      <div class="container">
+        <div class="section-head">
+          <h2>What to do</h2>
+          <p class="section-description">Build your days around weather, tides and whatever you feel like.</p>
+        </div>
+        <div class="grid grid-2">
+          <!-- Roaring Beach -->
+          <article class="card card-row">
+            <div class="icon">🏄</div>
+            <div>
+              <h3>Roaring Beach</h3>
+              <p>Surf, wander and watch the sunset on this wild stretch of sand. Popular with surfers and dog‑walkers.</p>
+            </div>
+          </article>
+          <!-- Cape Raoul -->
+          <article class="card card-row">
+            <div class="icon">🥾</div>
+            <div>
+              <h3>Cape Raoul</h3>
+              <p>Hike to the dramatic sea cliffs and witness towering dolerite columns and sweeping ocean views.</p>
+            </div>
+          </article>
+          <!-- White Beach -->
+          <article class="card card-row">
+            <div class="icon">🏖️</div>
+            <div>
+              <h3>White Beach</h3>
+              <p>A sheltered bay ideal for swimming, paddling and picnicking. Calm waters make it perfect for families.</p>
+            </div>
+          </article>
+          <!-- Port Arthur & beyond -->
+          <article class="card card-row">
+            <div class="icon">🏛️</div>
+            <div>
+              <h3>Port Arthur &amp; beyond</h3>
+              <p>Step back in time at the Port Arthur Historic Site, then explore convict ruins, artists’ studios and local eateries.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <h2>Gallery</h2>
+          <p class="section-description">Drop in 8–12 photos: cabin, views, nearby beaches and 1–2 lifestyle shots.</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-placeholder">Photo 1</div>
+          <div class="gallery-placeholder">Photo 2</div>
+          <div class="gallery-placeholder">Photo 3</div>
+          <div class="gallery-placeholder">Photo 4</div>
+          <div class="gallery-placeholder">Photo 5</div>
+          <div class="gallery-placeholder">Photo 6</div>
+          <div class="gallery-placeholder">Photo 7</div>
+          <div class="gallery-placeholder">Photo 8</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="location">
+      <div class="container">
+        <div class="section-head">
+          <h2>Location</h2>
+          <p class="section-description">Based near Nubeena on the Tasman Peninsula — close to epic coastline and national‑park energy.</p>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Getting here</h3>
+            <ul class="list">
+              <li>Fly into Hobart, then drive to the Tasman Peninsula.</li>
+              <li>Best with a car (for beaches and trailheads).</li>
+              <li>Weather changes fast — pack layers.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Map</h3>
+            <p class="small-text">Below is an interactive map centred on 120 Tip Road, Nubeena. You can pan and zoom to explore nearby trails and beaches.</p>
+            <div class="map-container">
+              <iframe
+                width="100%"
+                height="260"
+                frameborder="0"
+                style="border:0"
+                src="https://maps.google.com/maps?q=120%20Tip%20Road%20Nubeena%20Tasmania&z=14&output=embed"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="book">
+      <div class="container">
+        <div class="book-grid">
+          <div class="book-copy">
+            <h2>Book Tasman Escape</h2>
+            <p class="section-description">Set your booking link once it’s live. Until then, use Instagram DMs or email.</p>
+            <div class="button-group">
+              <a class="btn btn-primary" href="https://airbnb.com" target="_blank" rel="noopener">Book on Airbnb</a>
+              <a class="btn btn-secondary" href="https://instagram.com/tasmanescape" target="_blank" rel="noopener">@tasmanescape</a>
+            </div>
+          </div>
+          <form class="form" action="mailto:you@domain.com" method="post" enctype="text/plain">
+            <h3>Quick enquiry</h3>
+            <label>Name<input name="name" autocomplete="name" required></label>
+            <label>Email<input name="email" type="email" autocomplete="email" required></label>
+            <label>Message<textarea name="message" rows="4" placeholder="Dates, number of guests, anything you need…" required></textarea></label>
+            <button class="btn btn-primary" type="submit">Send</button>
+            <p class="small-text">This uses your email app. For a real form, use Formspree or Netlify Forms.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="docs">
+      <div class="container">
+        <div class="section-head">
+          <h2>Reference documents (private)</h2>
+          <p class="small-text">Keep off the public site unless you actually want to share them.</p>
+        </div>
+        <div class="card">
+          <ul class="list">
+            <li>Contract / supporting document: fileciteturn0file0</li>
+            <li>Certificate of Title extract: fileciteturn0file1</li>
+            <li>Deed / registry instrument: fileciteturn0file2</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="small-text">© <span id="year"></span> Tasman Escape. All rights reserved.</p>
+      <nav class="footer-links">
+        <a href="#stay">The stay</a>
+        <a href="#adventures">Adventures</a>
+        <a href="#book">Book</a>
+      </nav>
+    </div>
+  </footer>
+  <script>
+    const navToggle = document.getElementById("navToggle");
+    const navMenu = document.getElementById("navMenu");
+    if (navToggle && navMenu) {
+      navToggle.addEventListener("click", () => {
+        const open = navMenu.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        // Toggle an 'open' class on the button itself to animate the hamburger into a cross
+        navToggle.classList.toggle("open", open);
+      });
+      navMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+          navToggle.classList.remove("open");
+        });
+      });
+    }
+    const yearSpan = document.getElementById("year");
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>

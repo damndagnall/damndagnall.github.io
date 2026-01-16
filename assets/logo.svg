@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Simple, distinctive logo for Tasman Escape.
+
+  The design references the dolerite cliffs and sweeping waves of the Tasman Peninsula. Two curved lines evoke ocean swells, while the circle above suggests the sun rising over a headland. Colours match the site palette defined in styles.css (golden primary and dark background). Because this is a pure SVG vector graphic, it scales cleanly at any size.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Tasman Escape logo</title>
+  <desc id="logoDesc">Stylised sun and waves representing Tasmania’s coastal cliffs</desc>
+  <!-- Background is transparent so the logo can sit on dark or light surfaces -->
+  <g fill="none" stroke="none">
+    <!-- Sun -->
+    <circle cx="30" cy="18" r="6" fill="#d4b16a" />
+    <!-- Upper wave/arch: suggests the dolerite columns of Cape Raoul and Tasman Arch -->
+    <path d="M10 38 C20 24 40 24 50 38" stroke="#d4b16a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Lower wave: hints at the sea and beaches around Roaring Beach and White Beach -->
+    <path d="M7 45 C18 34 42 34 53 45" stroke="#d4b16a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

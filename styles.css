@@ -1,0 +1,530 @@
+/* Base reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 1.1rem;
+}
+
+/* Colour and spacing variables */
+:root {
+  --bg: #0f1c24;
+  --bg-alt: #142a34;
+  --card-bg: #1c3040;
+  --text-light: #f5f5f5;
+  --text-muted: #93a7b5;
+  --primary: #d4b16a;
+  --border: rgba(255, 255, 255, 0.08);
+  --radius: 14px;
+  --max-width: 1120px;
+}
+
+/*
+  Screen-reader-only utility class. Hides text visually while keeping it accessible for screen readers.
+  Used for the menu label in the hamburger button.
+*/
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.container {
+  width: min(92vw, var(--max-width));
+  margin-inline: auto;
+}
+
+/* Skip link */
+.skip {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  background: var(--bg-alt);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  z-index: 9999;
+}
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* Header & navigation */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 0;
+  position: relative;
+}
+
+/* Brand styling: the anchor wraps an inline SVG and the brand name */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+/* The logo icon scales with the surrounding text */
+.logo-img {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-menu a {
+  opacity: 0.85;
+  color: var(--text-muted);
+  transition: color 0.3s, opacity 0.3s;
+}
+
+.nav-menu a:hover {
+  color: var(--primary);
+  opacity: 1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn-small {
+  padding: 0.45rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--bg);
+  padding: 0.75rem 1.4rem;
+  border: 1px solid var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: #caa763;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 0.75rem 1.4rem;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary);
+  color: var(--bg);
+}
+
+/* Hamburger button */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 1.8rem;
+  height: 1.2rem;
+  position: relative;
+}
+
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text-light);
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s;
+}
+
+.nav-toggle .hamburger {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-toggle .hamburger::before {
+  content: "";
+  top: -6px;
+}
+
+.nav-toggle .hamburger::after {
+  content: "";
+  top: 6px;
+}
+
+/* When menu is open, rotate bars to form a cross */
+.nav-toggle.open .hamburger {
+  transform: rotate(45deg);
+}
+.nav-toggle.open .hamburger::before {
+  top: 0;
+  transform: rotate(90deg);
+}
+.nav-toggle.open .hamburger::after {
+  top: 0;
+  opacity: 0;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 80vh;
+  min-height: 520px;
+  /* Set the hero background to our Tasman Arch photograph */
+  background-image: url("assets/tasman_arch.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+}
+
+.subheading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  color: var(--primary);
+  margin-bottom: 0.8rem;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  line-height: 1.15;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.hero-tagline {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin-inline: auto;
+  margin-bottom: 2rem;
+}
+
+/* Sections */
+.section {
+  padding: 3rem 0;
+}
+
+.section-alt {
+  /* Use a blended photograph of the coastal cliffs for alternate sections */
+  background-color: var(--bg-alt);
+  background-image: url("assets/coastal_cliffs.jpg");
+  background-size: cover;
+  background-position: center;
+  /* Multiply blend mode darkens the photo so text remains legible */
+  background-blend-mode: multiply;
+}
+
+.section-head {
+  margin-bottom: 1.2rem;
+}
+
+.section-head h2 {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.section-description {
+  color: var(--text-muted);
+  max-width: 65ch;
+}
+
+.small-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Grid layouts */
+.grid {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  padding: 1.4rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+.card-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.icon {
+  font-size: 2rem;
+  width: 2.6rem;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Lists */
+.list {
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+}
+
+.list li {
+  margin-bottom: 0.35rem;
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.gallery-placeholder {
+  height: 150px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  background-color: var(--card-bg);
+}
+
+/* Map placeholder */
+.map-placeholder {
+  height: 220px;
+  border-radius: var(--radius);
+  border: 2px dashed var(--border);
+  background-color: var(--card-bg);
+  margin-top: 0.8rem;
+}
+
+/* Booking section */
+.book-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-light);
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--primary);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  background-color: var(--bg-alt);
+  padding: 1.6rem 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+/* Social feed widget placeholder */
+.social-widget {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Map container ensures iframes remain responsive */
+.map-container iframe {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+/* Destination sections */
+.destination-grid {
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: center;
+}
+
+.destination-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.destination-text h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.destination-text p {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .destination-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Responsive nav menu */
+@media (max-width: 900px) {
+  .nav-menu {
+    position: absolute;
+    right: 1rem;
+    top: 100%;
+    background-color: var(--bg-alt);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    min-width: 220px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+}
