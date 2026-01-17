@@ -1,3 +1,8 @@
+const CONFIG = {
+  bookingUrl: "", // e.g. "https://www.airbnb.com/h/your-listing"
+  instagramUrl: "", // e.g. "https://www.instagram.com/yourhandle"
+};
+
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
 
@@ -22,3 +27,14 @@ const yearSpan = document.getElementById("year");
 if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
+
+
+// Apply config-driven links (keeps hrefs out of the HTML)
+const bookingLink = document.getElementById('bookingLink');
+if (bookingLink && CONFIG.bookingUrl) bookingLink.href = CONFIG.bookingUrl;
+
+const instagramLink = document.getElementById('instagramLink');
+if (instagramLink && CONFIG.instagramUrl) instagramLink.href = CONFIG.instagramUrl;
+
+const igLink = document.getElementById('igLink');
+if (igLink && CONFIG.instagramUrl) igLink.href = CONFIG.instagramUrl;

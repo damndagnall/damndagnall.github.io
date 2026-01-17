@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tasman Escape</title>
+  <meta name="description" content="Tasman Escape — an eco-friendly retreat on Tasmania’s Tasman Peninsula.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <meta property="og:title" content="Tasman Escape">
+  <meta property="og:description" content="Tasman Escape — an eco-friendly retreat on Tasmania’s Tasman Peninsula.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/hero.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- skip link for accessibility -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Header and navigation -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="#" class="logo">
+        <!-- The logo combines the icon and brand name. The image has an empty alt because the brand name is provided in the adjacent span -->
+        <img src="assets/logo.svg" alt="" class="logo-img">
+        <span>Tasman&nbsp;Escape</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="sr-only">Menu</span>
+        <span class="hamburger"></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="#stay">The stay</a>
+        <a href="#roaring-beach">Roaring Beach</a>
+        <a href="#cape-raoul">Cape Raoul</a>
+        <a href="#white-beach">White Beach</a>
+        <a href="#port-arthur">Port Arthur</a>
+        <a href="#tasman-arch">Tasman Arch</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#location">Location</a>
+        <a class="btn btn-small" href="#book">Book</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero section -->
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content container">
+        <p class="subheading">Tasman Peninsula • Tasmania</p>
+        <h1 class="hero-title">Discover Tasmania’s Hidden Gems</h1>
+        <p class="hero-tagline">Explore nature sustainably with Tasman Escape</p>
+        <a href="#stay" class="btn btn-primary">Find out more</a>
+      </div>
+    </section>
+
+    <!-- The stay -->
+    <section class="section" id="stay">
+      <div class="container">
+        <div class="section-head">
+          <h2>The stay</h2>
+          <p class="section-description">
+            Simple, comfortable and practical — with the details that make a getaway feel effortless.
+          </p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Comfort &amp; calm</h3>
+            <p>Cosy sleeping, hot shower, quality linens, and a space that feels private and quiet.</p>
+            <ul class="list">
+              <li>Fresh towels + toiletries</li>
+              <li>Heating/cooling</li>
+              <li>Board games + books</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Eat well</h3>
+            <p>A proper kitchen setup for coffee rituals, big breakfasts and post‑adventure meals.</p>
+            <ul class="list">
+              <li>Full kitchen basics</li>
+              <li>Tea/coffee station</li>
+              <li>Outdoor dining (optional)</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Stay connected (or don’t)</h3>
+            <p>Good for a clean digital detox — with the option to plug in when needed.</p>
+            <ul class="list">
+              <li>Wi‑Fi (if available)</li>
+              <li>Desk/work nook (optional)</li>
+              <li>Local guides + maps</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Adventures -->
+    <section class="section section-alt" id="adventures">
+      <div class="container">
+        <div class="section-head">
+          <h2>What to do</h2>
+          <p class="section-description">
+            Build your days around weather, tides and whatever you feel like.
+          </p>
+        </div>
+        <div class="grid grid-2">
+          <!-- Roaring Beach -->
+          <article class="card card-row">
+            <div class="icon">🏄</div>
+            <div>
+              <h3>Roaring Beach</h3>
+              <p>Surf, wander and watch the sunset on this wild stretch of sand. Popular with surfers and dog‑walkers.</p>
+            </div>
+          </article>
+          <!-- Cape Raoul -->
+          <article class="card card-row">
+            <div class="icon">🥾</div>
+            <div>
+              <h3>Cape Raoul</h3>
+              <p>Hike to the dramatic sea cliffs and witness towering dolerite columns and sweeping ocean views.</p>
+            </div>
+          </article>
+          <!-- White Beach -->
+          <article class="card card-row">
+            <div class="icon">🏖️</div>
+            <div>
+              <h3>White Beach</h3>
+              <p>A sheltered bay ideal for swimming, paddling and picnicking. Calm waters make it perfect for families.</p>
+            </div>
+          </article>
+          <!-- Port Arthur & more -->
+          <article class="card card-row">
+            <div class="icon">🏛️</div>
+            <div>
+              <h3>Port Arthur &amp; beyond</h3>
+              <p>Step back in time at the Port Arthur Historic Site, then explore convict ruins, artists’ studios and local eateries.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destination details -->
+    <section class="section" id="roaring-beach">
+      <div class="container">
+        <div class="section-head">
+          <h2>Roaring Beach</h2>
+        </div>
+        <div class="destination-grid">
+          <img src="assets/roaring-beach.jpg" alt="Roaring Beach dunes and surf" />
+          <div class="destination-text">
+            <h3>Wild surf &amp; sand dunes</h3>
+            <p>Roaring Beach is notable for its sand dunes, surfing and beachcombing. It’s the only surfing beach on the west coast of the Tasman Peninsula and has a powerful rip, so exercise caution in the water. Access is via a gravel road from nearby Nubeena, and its remote setting makes it perfect for sunset walks and watching surfers ride the swells.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="cape-raoul">
+      <div class="container">
+        <div class="section-head">
+          <h2>Cape Raoul</h2>
+        </div>
+        <div class="destination-grid">
+          <img src="assets/cape-raoul.jpg" alt="Cape Raoul sea cliffs and dolerite columns" />
+          <div class="destination-text">
+            <h3>Dolerite cliffs &amp; ocean vistas</h3>
+            <p>Cape Raoul lies about 13&nbsp;km south of Nubeena within the western part of Tasman National Park. A well-marked 7&nbsp;km walking track winds through she-oak and eucalypt forest to a plateau of rock platforms and towering dolerite columns that soar 300&nbsp;m above the ocean. From the lookout, sweeping views extend across the Tasman Sea and to the remote islands off the cape.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="white-beach">
+      <div class="container">
+        <div class="section-head">
+          <h2>White Beach</h2>
+        </div>
+        <div class="destination-grid">
+          <img src="assets/white-beach.jpg" alt="White Beach sheltered bay and sand" />
+          <div class="destination-text">
+            <h3>Sheltered bay for families</h3>
+            <p>White Beach is a long, sweeping 3‑km beach facing west into a protected bay near Nubeena. With calm, shallow water and a very low hazard rating, it’s ideal for swimming, kayaking and family picnics. Multiple access points, a jetty and boat ramp for fishing, toilets at the northern end and views of the Brother and Sister Islands across the bay complete the picture.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="port-arthur">
+      <div class="container">
+        <div class="section-head">
+          <h2>Port Arthur</h2>
+        </div>
+        <div class="destination-grid">
+          <img src="assets/port-arthur.jpg" alt="Port Arthur historic settlement ruins" />
+          <div class="destination-text">
+            <h3>Convict history &amp; heritage</h3>
+            <p>The historic settlement of Port Arthur is a UNESCO World Heritage‑listed site about 97&nbsp;km southeast of Hobart. Established in 1830 as a timber‑getting camp and later expanded into a penal settlement for hardened convicts, the site now features well‑preserved ruins, a museum and immersive tours that explore the lives of convicts and their gaolers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tasman-arch">
+      <div class="container">
+        <div class="section-head">
+          <h2>Tasman Arch &amp; Devil’s Kitchen</h2>
+        </div>
+        <div class="destination-grid">
+          <img src="assets/tasman_arch.jpg" alt="Tasman Arch natural bridge" />
+          <div class="destination-text">
+            <h3>Natural bridges &amp; sea caves</h3>
+            <p>Tasman Arch is a soaring natural bridge carved in the sea cliffs near Eaglehawk Neck. Waves carved a sea cave whose roof partially collapsed, leaving a sandstone arch through which the ocean still surges. Just along the clifftop path you’ll find Devil’s Kitchen – a deep trench formed where a sea cave’s roof has completely collapsed. Both features are easily reached from car park lookouts and short walking tracks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social feed: latest #TasmanPeninsula posts -->
+    <section class="section" id="social">
+      <div class="container">        <div class="section-head">
+          <h2>Social</h2>
+          <p class="section-description">Follow along for updates, seasonal photos and local tips.</p>
+        </div>
+        <div class="social-widget">
+          <p class="small-text">Add your Instagram embed here (or keep it simple with links).</p>
+          <div class="button-group">
+            <a class="btn btn-secondary" id="igLink" href="#" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn btn-secondary" id="newsletterLink" href="#book">Enquire</a>
+          </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <h2>Gallery</h2>
+          <p class="section-description">
+            A few snapshots from around the peninsula (swap these for your own property photos when ready).
+          </p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-item"><img src="assets/hero.jpg" alt="Tasman Peninsula forest and coastline"></figure>
+          <figure class="gallery-item"><img src="assets/tasman_arch.jpg" alt="Tasman Arch sea cliff"></figure>
+          <figure class="gallery-item"><img src="assets/roaring-beach.jpg" alt="Roaring Beach dunes and surf"></figure>
+          <figure class="gallery-item"><img src="assets/white-beach.jpg" alt="White Beach sheltered bay"></figure>
+          <figure class="gallery-item"><img src="assets/cape-raoul.jpg" alt="Cape Raoul sea cliffs"></figure>
+          <figure class="gallery-item"><img src="assets/port-arthur.jpg" alt="Port Arthur historic ruins"></figure>
+          <figure class="gallery-item"><img src="assets/coastal_cliffs.jpg" alt="Tasman Peninsula coastal cliffs"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="section section-alt" id="location">
+      <div class="container">
+        <div class="section-head">
+          <h2>Location</h2>
+          <p class="section-description">
+            Based near Nubeena on the Tasman Peninsula — close to epic coastline and national‑park energy.
+          </p>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Getting here</h3>
+            <ul class="list">
+              <li>Fly into Hobart, then drive to the Tasman Peninsula.</li>
+              <li>Best with a car (for beaches and trailheads).</li>
+              <li>Weather changes fast — pack layers.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Map</h3>
+            <p class="small-text">Below is an interactive map centred on 120 Tip Road, Nubeena. You can pan and zoom to explore nearby trails and beaches.</p>
+            <!-- Google Maps embed pointing at 120 Tip Road, Nubeena, TAS. Adjust zoom if needed. -->
+            <div class="map-container">
+              <iframe
+                width="100%"
+                height="260"
+                frameborder="0"
+                style="border:0"
+                src="https://maps.google.com/maps?q=120%20Tip%20Road%20Nubeena%20Tasmania&z=14&output=embed"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking -->
+    <section class="section" id="book">
+      <div class="container">
+        <div class="book-grid">
+          <div class="book-copy">
+            <h2>Book Tasman Escape</h2>
+            <p class="section-description">
+              Set your booking link once it’s live. Until then, use Instagram DMs or email.
+            </p>
+            <div class="button-group">
+              <a class="btn btn-primary" id="bookingLink" href="#" target="_blank" rel="noopener">Book on Airbnb</a>
+              <a class="btn btn-secondary" id="instagramLink" href="#" target="_blank" rel="noopener">@tasmanescape</a>
+            </div>
+          </div>
+          <!-- Contact form posts to Formspree.  Replace `your-form-id` in the URL with your own endpoint from https://formspree.io -->
+          <form class="form" action="https://formspree.io/f/your-form-id" method="POST">
+            <h3>Quick enquiry</h3>
+            <label>
+              Name
+              <input name="name" autocomplete="name" required>
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" required>
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="4" placeholder="Dates, number of guests, anything you need…" required></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Send</button>
+            <p class="small-text">This form is processed by Formspree. Replace <code>your-form-id</code> in the <code>action</code> attribute with the ID provided by Formspree.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="small-text">© <span id="year"></span> Tasman Escape. All rights reserved.</p>
+      <nav class="footer-links">
+        <a href="#stay">The stay</a>
+        <a href="#adventures">Adventures</a>
+        <a href="#book">Book</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

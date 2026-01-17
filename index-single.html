@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Tasman Escape</title>
   <meta name="description" content="Tasman Escape — an eco-friendly retreat on Tasmania’s Tasman Peninsula.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <meta property="og:title" content="Tasman Escape">
+  <meta property="og:description" content="Tasman Escape — an eco-friendly retreat on Tasmania’s Tasman Peninsula.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/hero.jpg">
   <style>
     /* Embedded styles for single-file version */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -96,6 +101,8 @@
     .list li { margin-bottom: .35rem; }
     .gallery-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
     .gallery-placeholder { height: 150px; border: 2px dashed var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text-muted); background-color: var(--card-bg); }
+    .gallery-item { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background-color: var(--card-bg); }
+    .gallery-item img { display: block; width: 100%; height: 180px; object-fit: cover; }
     .map-placeholder { height: 220px; border-radius: var(--radius); border: 2px dashed var(--border); background-color: var(--card-bg); margin-top: .8rem; }
     .book-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start; }
     .button-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
@@ -164,60 +171,19 @@
 
     <!-- Social feed: latest #TasmanPeninsula posts -->
     <section class="section" id="social">
-      <div class="container">
-        <div class="section-head">
-          <h2>Latest #TasmanPeninsula</h2>
-          <p class="section-description">See what others are sharing from around the Tasman Peninsula. Replace this placeholder with a real social feed widget for Instagram or X.</p>
+      <div class="container">        <div class="section-head">
+          <h2>Social</h2>
+          <p class="section-description">Follow along for updates, seasonal photos and local tips.</p>
         </div>
-        <!-- Placeholder for social feed. To embed a live hashtag feed, sign up for a free Instagram hashtag widget (e.g. SnapWidget, Elfsight or Curator.io) and paste the provided iframe below. -->
         <div class="social-widget">
-          <p class="small-text">Embed your hashtag feed widget here. For example, using SnapWidget or Taggbox with the tag “TasmanPeninsula”.</p>
-          <!-- Example embed (replace src with your widget URL) -->
-          <!--
-          <iframe src="https://snapwidget.com/embed/your-widget-id" style="border:none;overflow:hidden" width="100%" height="400" scrolling="no" allowtransparency="true"></iframe>
-          -->
+          <p class="small-text">Add your Instagram embed here (or keep it simple with links).</p>
+          <div class="button-group">
+            <a class="btn btn-secondary" id="igLink" href="#" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn btn-secondary" id="newsletterLink" href="#book">Enquire</a>
+          </div>
         </div>
-      </div>
+    </div>
     </section>
-
-    <section class="section" id="stay">
-      <div class="container">
-        <div class="section-head">
-          <h2>The stay</h2>
-          <p class="section-description">Simple, comfortable and practical — with the details that make a getaway feel effortless.</p>
-        </div>
-        <div class="grid grid-3">
-          <article class="card">
-            <h3>Comfort &amp; calm</h3>
-            <p>Cosy sleeping, hot shower, quality linens, and a space that feels private and quiet.</p>
-            <ul class="list">
-              <li>Fresh towels + toiletries</li>
-              <li>Heating/cooling</li>
-              <li>Board games + books</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3>Eat well</h3>
-            <p>A proper kitchen setup for coffee rituals, big breakfasts and post‑adventure meals.</p>
-            <ul class="list">
-              <li>Full kitchen basics</li>
-              <li>Tea/coffee station</li>
-              <li>Outdoor dining (optional)</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h3>Stay connected (or don’t)</h3>
-            <p>Good for a clean digital detox — with the option to plug in when needed.</p>
-            <ul class="list">
-              <li>Wi‑Fi (if available)</li>
-              <li>Desk/work nook (optional)</li>
-              <li>Local guides + maps</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section class="section section-alt" id="adventures">
       <div class="container">
         <div class="section-head">
@@ -268,14 +234,13 @@
           <p class="section-description">Drop in 8–12 photos: cabin, views, nearby beaches and 1–2 lifestyle shots.</p>
         </div>
         <div class="gallery-grid">
-          <div class="gallery-placeholder">Photo 1</div>
-          <div class="gallery-placeholder">Photo 2</div>
-          <div class="gallery-placeholder">Photo 3</div>
-          <div class="gallery-placeholder">Photo 4</div>
-          <div class="gallery-placeholder">Photo 5</div>
-          <div class="gallery-placeholder">Photo 6</div>
-          <div class="gallery-placeholder">Photo 7</div>
-          <div class="gallery-placeholder">Photo 8</div>
+          <figure class="gallery-item"><img src="assets/hero.jpg" alt="Tasman Peninsula forest and coastline"></figure>
+          <figure class="gallery-item"><img src="assets/tasman_arch.jpg" alt="Tasman Arch sea cliff"></figure>
+          <figure class="gallery-item"><img src="assets/roaring-beach.jpg" alt="Roaring Beach dunes and surf"></figure>
+          <figure class="gallery-item"><img src="assets/white-beach.jpg" alt="White Beach sheltered bay"></figure>
+          <figure class="gallery-item"><img src="assets/cape-raoul.jpg" alt="Cape Raoul sea cliffs"></figure>
+          <figure class="gallery-item"><img src="assets/port-arthur.jpg" alt="Port Arthur historic ruins"></figure>
+          <figure class="gallery-item"><img src="assets/coastal_cliffs.jpg" alt="Tasman Peninsula coastal cliffs"></figure>
         </div>
       </div>
     </section>
@@ -321,8 +286,8 @@
             <h2>Book Tasman Escape</h2>
             <p class="section-description">Set your booking link once it’s live. Until then, use Instagram DMs or email.</p>
             <div class="button-group">
-              <a class="btn btn-primary" href="https://airbnb.com" target="_blank" rel="noopener">Book on Airbnb</a>
-              <a class="btn btn-secondary" href="https://instagram.com/tasmanescape" target="_blank" rel="noopener">@tasmanescape</a>
+              <a class="btn btn-primary" id="bookingLink" href="#" target="_blank" rel="noopener">Book on Airbnb</a>
+              <a class="btn btn-secondary" id="instagramLink" href="#" target="_blank" rel="noopener">@tasmanescape</a>
             </div>
           </div>
           <form class="form" action="mailto:you@domain.com" method="post" enctype="text/plain">
@@ -333,22 +298,6 @@
             <button class="btn btn-primary" type="submit">Send</button>
             <p class="small-text">This uses your email app. For a real form, use Formspree or Netlify Forms.</p>
           </form>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="docs">
-      <div class="container">
-        <div class="section-head">
-          <h2>Reference documents (private)</h2>
-          <p class="small-text">Keep off the public site unless you actually want to share them.</p>
-        </div>
-        <div class="card">
-          <ul class="list">
-            <li>Contract / supporting document: fileciteturn0file0</li>
-            <li>Certificate of Title extract: fileciteturn0file1</li>
-            <li>Deed / registry instrument: fileciteturn0file2</li>
-          </ul>
         </div>
       </div>
     </section>
