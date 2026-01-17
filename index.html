@@ -11,6 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/hero.jpg">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <!-- skip link for accessibility -->
@@ -304,11 +305,11 @@
             </p>
             <div class="button-group">
               <a class="btn btn-primary" id="bookingLink" href="#" target="_blank" rel="noopener">Book on Airbnb</a>
-              <a class="btn btn-secondary" id="instagramLink" href="#" target="_blank" rel="noopener">@tasmanescape</a>
+              <a class="btn btn-secondary" id="instagramLink" href="#" target="_blank" rel="noopener">@damndagnall</a>
             </div>
           </div>
           <!-- Contact form posts to Formspree.  Replace `your-form-id` in the URL with your own endpoint from https://formspree.io -->
-          <form class="form" action="https://formspree.io/f/your-form-id" method="POST">
+          <form class="form" id="contactForm" novalidate>
             <h3>Quick enquiry</h3>
             <label>
               Name
@@ -322,8 +323,21 @@
               Message
               <textarea name="message" rows="4" placeholder="Dates, number of guests, anything you need…" required></textarea>
             </label>
+
+            <!-- Honeypot: bots fill hidden fields. Humans should leave this blank. -->
+            <label class="hp" aria-hidden="true">
+              Website
+              <input name="website" tabindex="-1" autocomplete="off">
+            </label>
+
+            <!-- Cloudflare Turnstile (public site key is safe to publish). -->
+            <div class="turnstile-wrap">
+              <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
+            </div>
+
             <button class="btn btn-primary" type="submit">Send</button>
-            <p class="small-text">This form is processed by Formspree. Replace <code>your-form-id</code> in the <code>action</code> attribute with the ID provided by Formspree.</p>
+            <p class="small-text" id="formStatus" role="status" aria-live="polite"></p>
+            <p class="small-text">This form is protected by Cloudflare Turnstile and sent via your Cloudflare backend (no email address is exposed on the page).</p>
           </form>
         </div>
       </div>
