@@ -18,8 +18,6 @@
       --sand: #d4b16a;
       --sand-light: #e6c78a;
       --white: #ffffff;
-      --light-grey: #f5f5f5;
-      --text-dark: #1a1a1a;
       --text-light: #f5f5f5;
       --text-muted: #93a7b5;
       --card-bg: #1c3040;
@@ -41,7 +39,6 @@
       padding: 0 20px;
     }
 
-    /* Header */
     header {
       position: fixed;
       top: 0;
@@ -122,7 +119,6 @@
       box-shadow: 0 4px 12px rgba(212, 177, 106, 0.3);
     }
 
-    /* Hero */
     .hero {
       position: relative;
       height: 100vh;
@@ -241,7 +237,6 @@
       color: var(--dark-ocean);
     }
 
-    /* Sections */
     section {
       padding: 6rem 0;
       position: relative;
@@ -269,7 +264,6 @@
       margin: 0 auto;
     }
 
-    /* Features Grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -337,7 +331,6 @@
       font-weight: bold;
     }
 
-    /* Activities */
     .activities-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -363,6 +356,7 @@
       height: 250px;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(135deg, #1a2f4a 0%, #0a1628 100%);
     }
 
     .activity-image img {
@@ -401,7 +395,6 @@
       line-height: 1.8;
     }
 
-    /* Booking System */
     .booking-container {
       background: var(--card-bg);
       border-radius: 20px;
@@ -489,7 +482,7 @@
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 0.5rem;
-      margin: 2rem 0;
+      margin: 1rem 0;
     }
 
     .calendar-day {
@@ -502,40 +495,62 @@
       transition: all 0.2s;
       font-size: 0.9rem;
       border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      min-height: 40px;
+    }
+
+    .calendar-day.empty {
+      border: none;
+      background: transparent;
+      cursor: default;
     }
 
     .calendar-day.available {
       background: rgba(212, 177, 106, 0.1);
       color: var(--sand);
+      border-color: var(--sand);
     }
 
     .calendar-day.available:hover {
       background: var(--sand);
       color: var(--dark-ocean);
+      transform: scale(1.05);
     }
 
     .calendar-day.booked {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 100, 100, 0.1);
       color: var(--text-muted);
       cursor: not-allowed;
+      border-color: rgba(255, 100, 100, 0.3);
     }
 
     .calendar-day.selected {
       background: var(--sand);
       color: var(--dark-ocean);
       font-weight: bold;
+      border-color: var(--sand-light);
+      box-shadow: 0 0 10px rgba(212, 177, 106, 0.5);
+    }
+
+    .calendar-day.in-range {
+      background: rgba(212, 177, 106, 0.2);
+      color: var(--sand-light);
     }
 
     .calendar-day.past {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.02);
+      color: rgba(147, 167, 181, 0.3);
       cursor: not-allowed;
+      border-color: rgba(255, 255, 255, 0.05);
     }
 
     .calendar-header {
       font-weight: 600;
       color: var(--sand);
-      padding: 1rem 0;
+      padding: 0.75rem 0;
+      text-align: center;
+      font-size: 0.85rem;
     }
 
     .availability-legend {
@@ -559,7 +574,6 @@
       border: 1px solid var(--border);
     }
 
-    /* Map */
     .map-container {
       height: 500px;
       border-radius: 16px;
@@ -574,7 +588,6 @@
       border: none;
     }
 
-    /* Gallery */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -588,6 +601,7 @@
       position: relative;
       cursor: pointer;
       transition: all 0.3s;
+      background: linear-gradient(135deg, #1a2f4a 0%, #0a1628 100%);
     }
 
     .gallery-item img {
@@ -619,7 +633,6 @@
       transform: translateY(0);
     }
 
-    /* Footer */
     footer {
       background: var(--dark-ocean);
       border-top: 1px solid var(--border);
@@ -684,7 +697,49 @@
       transform: translateY(-3px);
     }
 
-    /* Mobile */
+    .status-message {
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      display: none;
+    }
+
+    .status-message.show {
+      display: block;
+    }
+
+    .status-message.success {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      color: #4caf50;
+    }
+
+    .status-message.error {
+      background: rgba(244, 67, 54, 0.1);
+      border: 1px solid rgba(244, 67, 54, 0.3);
+      color: #f44336;
+    }
+
+    .spinner {
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--sand);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 2rem auto;
+      display: none;
+    }
+
+    .spinner.show {
+      display: block;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -729,51 +784,6 @@
       .calendar-day {
         font-size: 0.75rem;
       }
-    }
-
-    /* Status Messages */
-    .status-message {
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
-      display: none;
-    }
-
-    .status-message.show {
-      display: block;
-    }
-
-    .status-message.success {
-      background: rgba(76, 175, 80, 0.1);
-      border: 1px solid rgba(76, 175, 80, 0.3);
-      color: #4caf50;
-    }
-
-    .status-message.error {
-      background: rgba(244, 67, 54, 0.1);
-      border: 1px solid rgba(244, 67, 54, 0.3);
-      color: #f44336;
-    }
-
-    /* Loading Spinner */
-    .spinner {
-      border: 3px solid var(--border);
-      border-top: 3px solid var(--sand);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 2rem auto;
-      display: none;
-    }
-
-    .spinner.show {
-      display: block;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -867,56 +877,56 @@
       <div class="activities-grid">
         <div class="activity-card">
           <div class="activity-image">
-            <img src="images/roaring-beach.jpg" alt="Roaring Beach" loading="lazy">
+            <img src="assets/images/roaring-beach.jpg" alt="Roaring Beach" loading="lazy">
           </div>
           <div class="activity-content">
             <h3>Roaring Beach</h3>
-            <p>Experience wild surf and pristine sand dunes. The only surfing beach on the west coast of Tasman Peninsula, perfect for sunset walks and watching surfers ride powerful swells. Access via scenic gravel road from Nubeena.</p>
+            <p>Experience wild surf and pristine sand dunes. The only surfing beach on the west coast of Tasman Peninsula, perfect for sunset walks and watching surfers ride powerful swells.</p>
           </div>
         </div>
         <div class="activity-card">
           <div class="activity-image">
-            <img src="images/cape-raoul.jpg" alt="Cape Raoul" loading="lazy">
+            <img src="assets/images/cape-raoul.jpg" alt="Cape Raoul" loading="lazy">
           </div>
           <div class="activity-content">
             <h3>Cape Raoul</h3>
-            <p>Hike through eucalypt forest to towering 300m dolerite cliffs. The 7km track in Tasman National Park offers sweeping ocean views and dramatic geological formations. One of Tasmania's most spectacular coastal walks.</p>
+            <p>Hike through eucalypt forest to towering 300m dolerite cliffs. The 7km track in Tasman National Park offers sweeping ocean views and dramatic geological formations.</p>
           </div>
         </div>
         <div class="activity-card">
           <div class="activity-image">
-            <img src="images/white-beach.jpg" alt="White Beach" loading="lazy">
+            <img src="assets/images/white-beach.jpg" alt="White Beach" loading="lazy">
           </div>
           <div class="activity-content">
             <h3>White Beach</h3>
-            <p>A sheltered 3km bay with calm, shallow waters ideal for families. Perfect for swimming, kayaking, and picnics. Features jetty, boat ramp, and views of Brother and Sister Islands. Very low hazard rating makes it perfect for all ages.</p>
+            <p>A sheltered 3km bay with calm, shallow waters ideal for families. Perfect for swimming, kayaking, and picnics. Features jetty, boat ramp, and views of Brother and Sister Islands.</p>
           </div>
         </div>
         <div class="activity-card">
           <div class="activity-image">
-            <img src="images/port-arthur.jpg" alt="Port Arthur Historic Site" loading="lazy">
+            <img src="assets/images/port-arthur.jpg" alt="Port Arthur Historic Site" loading="lazy">
           </div>
           <div class="activity-content">
             <h3>Port Arthur Historic Site</h3>
-            <p>Step back in time at this UNESCO World Heritage site. Explore well-preserved convict ruins, immersive museum exhibits, and learn about Tasmania's fascinating colonial history through guided tours and ghost walks.</p>
+            <p>Step back in time at this UNESCO World Heritage site. Explore well-preserved convict ruins, immersive museum exhibits, and learn about Tasmania's fascinating colonial history.</p>
           </div>
         </div>
         <div class="activity-card">
           <div class="activity-image">
-            <img src="images/tasman-arch.jpg" alt="Tasman Arch" loading="lazy">
+            <img src="assets/images/tasman-arch.jpg" alt="Tasman Arch" loading="lazy">
           </div>
           <div class="activity-content">
             <h3>Tasman Arch</h3>
-            <p>Marvel at nature's power at this soaring natural bridge carved by ocean waves. Walk to Devil's Kitchen, a dramatic collapsed sea cave. Easy access from car park with spectacular clifftop views.</p>
+            <p>Marvel at nature's power at this soaring natural bridge carved by ocean waves. Walk to Devil's Kitchen, a dramatic collapsed sea cave. Easy access from car park.</p>
           </div>
         </div>
         <div class="activity-card">
           <div class="activity-image">
-            <img src="images/local-arts-dining.jpg" alt="Local Arts & Dining" loading="lazy">
+            <img src="assets/images/local-arts-dining.jpg" alt="Local Arts & Dining" loading="lazy">
           </div>
           <div class="activity-content">
             <h3>Local Arts & Dining</h3>
-            <p>Discover artists' studios, boutique galleries, and fresh Tasmanian produce. Sample local wines, craft beers, and seafood at nearby eateries. Experience authentic Tasmanian hospitality and creativity.</p>
+            <p>Discover artists' studios, boutique galleries, and fresh Tasmanian produce. Sample local wines, craft beers, and seafood at nearby eateries.</p>
           </div>
         </div>
       </div>
@@ -931,22 +941,22 @@
       </div>
       <div class="gallery-grid">
         <div class="gallery-item" data-caption="Dramatic Coastal Cliffs">
-          <img src="images/coastal-cliffs.jpg" alt="Dramatic Coastal Cliffs" loading="lazy">
+          <img src="assets/images/coastal-cliffs.jpg" alt="Dramatic Coastal Cliffs" loading="lazy">
         </div>
         <div class="gallery-item" data-caption="Tasman Arch Natural Bridge">
-          <img src="images/tasman-arch-natural.jpg" alt="Tasman Arch Natural Bridge" loading="lazy">
+          <img src="assets/images/tasman-arch-natural.jpg" alt="Tasman Arch Natural Bridge" loading="lazy">
         </div>
         <div class="gallery-item" data-caption="Roaring Beach Sunset">
-          <img src="images/roaring-beach-sunset.jpg" alt="Roaring Beach Sunset" loading="lazy">
+          <img src="assets/images/roaring-beach-sunset.jpg" alt="Roaring Beach Sunset" loading="lazy">
         </div>
         <div class="gallery-item" data-caption="White Beach Paradise">
-          <img src="images/white-beach-paradise.jpg" alt="White Beach Paradise" loading="lazy">
+          <img src="assets/images/white-beach-paradise.jpg" alt="White Beach Paradise" loading="lazy">
         </div>
         <div class="gallery-item" data-caption="Cape Raoul Lookout">
-          <img src="images/cape-raoul-lookout.jpg" alt="Cape Raoul Lookout" loading="lazy">
+          <img src="assets/images/cape-raoul-lookout.jpg" alt="Cape Raoul Lookout" loading="lazy">
         </div>
         <div class="gallery-item" data-caption="Port Arthur Heritage">
-          <img src="images/port-arthur-heritage.jpg" alt="Port Arthur Heritage" loading="lazy">
+          <img src="assets/images/port-arthur-heritage.jpg" alt="Port Arthur Heritage" loading="lazy">
         </div>
       </div>
     </div>
@@ -1013,7 +1023,7 @@
             <span>Available</span>
           </div>
           <div class="legend-item">
-            <div class="legend-color" style="background: rgba(255, 255, 255, 0.05);"></div>
+            <div class="legend-color" style="background: rgba(255, 100, 100, 0.1); border-color: rgba(255, 100, 100, 0.3);"></div>
             <span>Booked</span>
           </div>
           <div class="legend-item">
@@ -1152,7 +1162,6 @@
   </footer>
 
   <script>
-    // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     
@@ -1161,7 +1170,6 @@
       menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
     });
 
-    // Close menu when clicking a link
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
@@ -1169,7 +1177,6 @@
       });
     });
 
-    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -1185,7 +1192,6 @@
       });
     });
 
-    // Hide header on scroll down, show on scroll up
     let lastScroll = 0;
     const header = document.getElementById('header');
     
@@ -1201,7 +1207,6 @@
       lastScroll = currentScroll;
     });
 
-    // Animated particles in hero
     const particlesContainer = document.getElementById('particles');
     for (let i = 0; i < 30; i++) {
       const particle = document.createElement('div');
@@ -1215,7 +1220,6 @@
       particlesContainer.appendChild(particle);
     }
 
-    // Booking System with Persistent Storage
     const bookingForm = document.getElementById('bookingForm');
     const checkInInput = document.getElementById('checkIn');
     const checkOutInput = document.getElementById('checkOut');
@@ -1226,22 +1230,25 @@
     const currentMonthSpan = document.getElementById('currentMonth');
     const calendarGrid = document.getElementById('calendarGrid');
 
-    // Set minimum date to today
-    const today = new Date().toISOString().split('T')[0];
-    checkInInput.min = today;
-    checkOutInput.min = today;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayStr = today.toISOString().split('T')[0];
+    checkInInput.min = todayStr;
+    checkOutInput.min = todayStr;
 
-    // Update checkout min date when checkin changes
     checkInInput.addEventListener('change', () => {
       checkOutInput.min = checkInInput.value;
       if (checkOutInput.value && checkOutInput.value <= checkInInput.value) {
         checkOutInput.value = '';
       }
+      renderCalendar();
     });
 
-    // Simulated booking data (in production, this would come from your backend)
+    checkOutInput.addEventListener('change', () => {
+      renderCalendar();
+    });
+
     async function getBookings() {
-      // If using Google Sheets, fetch from there
       if (BACKEND_CONFIG.backend === 'googleSheets') {
         const sheetsBookings = await getGoogleSheetsBookings();
         if (sheetsBookings.length > 0) {
@@ -1249,7 +1256,6 @@
         }
       }
       
-      // Otherwise use local storage
       try {
         const result = await window.storage.get('tasman-bookings', true);
         return result ? JSON.parse(result.value) : [];
@@ -1270,9 +1276,8 @@
       }
     }
 
-    // Calendar navigation
     let currentDate = new Date();
-    currentDate.setDate(1); // Start of current month
+    currentDate.setDate(1);
 
     async function renderCalendar() {
       const bookings = await getBookings();
@@ -1285,23 +1290,24 @@
 
       currentMonthSpan.textContent = `${monthNames[month]} ${year}`;
 
-      // Clear days (keep headers)
       while (calendarGrid.children.length > 7) {
         calendarGrid.removeChild(calendarGrid.lastChild);
       }
 
-      // Empty cells before first day
       for (let i = 0; i < firstDay; i++) {
         const emptyDay = document.createElement('div');
-        emptyDay.className = 'calendar-day';
+        emptyDay.className = 'calendar-day empty';
         calendarGrid.appendChild(emptyDay);
       }
 
-      // Days of the month
+      const checkInDate = checkInInput.value;
+      const checkOutDate = checkOutInput.value;
+
       for (let day = 1; day <= daysInMonth; day++) {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const dayDate = new Date(dateStr);
-        const isPast = dayDate < new Date(today);
+        dayDate.setHours(0, 0, 0, 0);
+        const isPast = dayDate < today;
         const isBooked = bookings.some(b => dateStr >= b.checkIn && dateStr < b.checkOut);
 
         const dayElem = document.createElement('div');
@@ -1313,38 +1319,52 @@
           dayElem.classList.add('past');
         } else if (isBooked) {
           dayElem.classList.add('booked');
+          dayElem.title = 'Already booked';
         } else {
           dayElem.classList.add('available');
+          
+          if (dateStr === checkInDate) {
+            dayElem.classList.add('selected');
+            dayElem.title = 'Check-in';
+          } else if (dateStr === checkOutDate) {
+            dayElem.classList.add('selected');
+            dayElem.title = 'Check-out';
+          } else if (checkInDate && checkOutDate && dateStr > checkInDate && dateStr < checkOutDate) {
+            dayElem.classList.add('in-range');
+            dayElem.title = 'Selected range';
+          }
+
+          dayElem.addEventListener('click', function() {
+            handleDateClick(dateStr);
+          });
         }
 
         calendarGrid.appendChild(dayElem);
       }
 
-      // Disable prev button if current month
-      prevMonthBtn.disabled = currentDate.getMonth() === new Date().getMonth() && currentDate.getFullYear() === new Date().getFullYear();
-
-      // Add click handlers to available days
-      document.querySelectorAll('.calendar-day.available').forEach(day => {
-        day.addEventListener('click', function() {
-          const date = this.dataset.date;
-          if (!checkInInput.value) {
-            checkInInput.value = date;
-            document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
-            this.classList.add('selected');
-          } else if (!checkOutInput.value && date > checkInInput.value) {
-            checkOutInput.value = date;
-            this.classList.add('selected');
-          } else {
-            checkInInput.value = date;
-            checkOutInput.value = '';
-            document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
-            this.classList.add('selected');
-          }
-        });
-      });
+      prevMonthBtn.disabled = currentDate.getMonth() === new Date().getMonth() && 
+                              currentDate.getFullYear() === new Date().getFullYear();
     }
 
-    // Initial render
+    function handleDateClick(dateStr) {
+      if (!checkInInput.value) {
+        checkInInput.value = dateStr;
+        checkOutInput.value = '';
+      } else if (!checkOutInput.value) {
+        if (dateStr > checkInInput.value) {
+          checkOutInput.value = dateStr;
+        } else {
+          checkInInput.value = dateStr;
+          checkOutInput.value = '';
+        }
+      } else {
+        checkInInput.value = dateStr;
+        checkOutInput.value = '';
+      }
+      
+      renderCalendar();
+    }
+
     renderCalendar();
 
     prevMonthBtn.addEventListener('click', () => {
@@ -1359,16 +1379,11 @@
       renderCalendar();
     });
 
-    // CONFIGURATION - Use Google Sheets for security
     const BACKEND_CONFIG = {
-      // Google Apps Script Web App URL
       googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbzhyPFz_m3q5c_ldWhhodTIIk8ApXImz_Y8zHCZ8TaCUGY5g9dRI0wVDwO_RjVkXA98/exec',
-      
-      // Use Google Sheets for secure, private bookings
       backend: 'googleSheets'
     };
 
-    // Handle form submission
     bookingForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
@@ -1383,7 +1398,6 @@
         timestamp: new Date().toISOString()
       };
       
-      // Show loading
       spinner.classList.add('show');
       statusMessage.classList.remove('show');
       
@@ -1391,7 +1405,6 @@
       let errorMessage = 'Unable to process booking. Please try again.';
       
       try {
-        // Send to secure Google Sheets backend
         success = await sendToGoogleSheets(formData);
       } catch (error) {
         console.error('Booking error:', error);
@@ -1409,10 +1422,8 @@
         statusMessage.className = 'status-message success show';
         bookingForm.reset();
         
-        // Regenerate calendar with fresh data from Google Sheets
         await renderCalendar();
         
-        // Scroll to message
         statusMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
         statusMessage.textContent = errorMessage;
@@ -1420,7 +1431,6 @@
       }
     });
 
-    // Google Sheets integration
     async function sendToGoogleSheets(data) {
       if (!BACKEND_CONFIG.googleSheetsUrl || BACKEND_CONFIG.googleSheetsUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
         throw new Error('Google Sheets URL not configured');
@@ -1428,18 +1438,16 @@
       
       const response = await fetch(BACKEND_CONFIG.googleSheetsUrl, {
         method: 'POST',
-        mode: 'no-cors', // Required for Google Apps Script
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       });
       
-      // Note: no-cors mode doesn't allow reading response, so we assume success
       return true;
     }
 
-    // Load bookings from Google Sheets
     async function getGoogleSheetsBookings() {
       if (!BACKEND_CONFIG.googleSheetsUrl || BACKEND_CONFIG.googleSheetsUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
         return [];
@@ -1457,10 +1465,8 @@
       return [];
     }
 
-    // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Intersection Observer for fade-in animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -1475,7 +1481,6 @@
       });
     }, observerOptions);
 
-    // Observe all cards and sections
     document.querySelectorAll('.feature-card, .activity-card, .gallery-item').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(20px)';
