@@ -481,8 +481,10 @@
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 0.5rem;
+      gap: 0;
       margin: 1rem 0;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     .calendar-day {
@@ -490,26 +492,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s;
       font-size: 0.9rem;
-      border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.05);
       color: var(--text-muted);
       min-height: 40px;
+      border: none;
+      outline: 1px solid var(--border);
+      outline-offset: -1px;
+      border-radius: 8px;
+      position: relative;
+      z-index: 0;
     }
 
     .calendar-day.empty {
       border: none;
+      outline: none;
       background: transparent;
       cursor: default;
     }
 
     .calendar-day.available {
-      background: rgba(212, 177, 106, 0.1);
+      background: rgba(212, 177, 106, 0.10);
       color: var(--sand);
-      border-color: var(--sand);
+      outline-color: rgba(212, 177, 106, 0.55);
     }
 
     .calendar-day.available:hover {
@@ -519,30 +526,63 @@
     }
 
     .calendar-day.booked {
-      background: rgba(255, 100, 100, 0.1);
+      background: rgba(255, 100, 100, 0.12);
       color: var(--text-muted);
       cursor: not-allowed;
-      border-color: rgba(255, 100, 100, 0.3);
+      outline-color: rgba(255, 100, 100, 0.35);
     }
 
     .calendar-day.selected {
       background: var(--sand);
       color: var(--dark-ocean);
       font-weight: bold;
-      border-color: var(--sand-light);
+      outline-color: var(--sand-light);
       box-shadow: 0 0 10px rgba(212, 177, 106, 0.5);
+      z-index: 2;
     }
 
     .calendar-day.in-range {
-      background: rgba(212, 177, 106, 0.2);
+      background: rgba(212, 177, 106, 0.25);
       color: var(--sand-light);
+      outline-color: rgba(212, 177, 106, 0.35);
+      z-index: 1;
     }
 
     .calendar-day.past {
       background: rgba(255, 255, 255, 0.02);
       color: rgba(147, 167, 181, 0.3);
       cursor: not-allowed;
-      border-color: rgba(255, 255, 255, 0.05);
+      outline-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Range bar styling (contiguous blocks) */
+    .calendar-day.range-start {
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+
+    .calendar-day.range-end {
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
+    .calendar-day.range-middle {
+      border-radius: 0;
+    }
+
+    .calendar-day.range-start.range-end {
+      border-radius: 12px;
+    }
+    /* Make booked / selected ranges look like a continuous bar */
+    .calendar-day.booked,
+    .calendar-day.in-range {
+      border-radius: 0;
+    }
+
+    /* Remove hover scaling when in a bar to prevent gaps */
+    .calendar-day.in-range:hover,
+    .calendar-day.booked:hover {
+      transform: none;
     }
 
     .calendar-header {
@@ -1047,6 +1087,7 @@
             <div class="calendar-header">Fri</div>
             <div class="calendar-header">Sat</div>
           </div>
+          <div class="spinner" id="calendarSpinner"></div>
         </div>
 
         <form id="bookingForm">
@@ -1229,6 +1270,80 @@
     const nextMonthBtn = document.getElementById('nextMonth');
     const currentMonthSpan = document.getElementById('currentMonth');
     const calendarGrid = document.getElementById('calendarGrid');
+    const calendarSpinner = document.getElementById('calendarSpinner');
+
+    const BACKEND_CONFIG = {
+      googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbzhyPFz_m3q5c_ldWhhodTIIk8ApXImz_Y8zHCZ8TaCUGY5g9dRI0wVDwO_RjVkXA98/exec',
+      backend: 'googleSheets'
+    };
+
+    // Availability fetch caching (prevents a network call on every calendar render)
+    const BOOKINGS_CACHE_TTL_MS = 60 * 1000; // 1 minute
+    let bookingsCache = { data: null, fetchedAt: 0 };
+    let bookingsInFlight = null;
+
+    function parseISODate(dateStr) {
+      // Safe local-midnight parse: avoids timezone shifting
+      const [y, m, d] = String(dateStr).split('-').map(Number);
+      return new Date(y, (m || 1) - 1, d || 1, 0, 0, 0, 0);
+    }
+
+    function toISODate(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    function addDaysISO(dateStr, days) {
+      const d = parseISODate(dateStr);
+      d.setDate(d.getDate() + days);
+      return toISODate(d);
+    }
+
+    function isDateBooked(dateStr, bookings) {
+      // Display is inclusive of check-out date (matches user expectation for a continuous bar)
+      return bookings.some(b => dateStr >= b.checkIn && dateStr <= b.checkOut);
+    }
+
+    async function fetchGoogleSheetsBookings() {
+      if (!BACKEND_CONFIG.googleSheetsUrl || BACKEND_CONFIG.googleSheetsUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        return [];
+      }
+      const res = await fetch(BACKEND_CONFIG.googleSheetsUrl, { method: 'GET', cache: 'no-store' });
+      if (!res.ok) throw new Error(`Failed to load availability (${res.status})`);
+      const json = await res.json();
+      return Array.isArray(json) ? json : [];
+    }
+
+    async function loadBookings(force = false) {
+      const now = Date.now();
+      const fresh = bookingsCache.data && (now - bookingsCache.fetchedAt) < BOOKINGS_CACHE_TTL_MS;
+      if (!force && fresh) return bookingsCache.data;
+
+      if (bookingsInFlight) return bookingsInFlight;
+
+      // If we don't have cache yet, show spinner while fetching
+      if (!bookingsCache.data) calendarSpinner.classList.add('show');
+
+      bookingsInFlight = (async () => {
+        try {
+          const data = await fetchGoogleSheetsBookings();
+          bookingsCache = { data, fetchedAt: Date.now() };
+          return data;
+        } catch (err) {
+          console.error('Failed to load bookings:', err);
+          // Fall back to whatever we last had (or empty)
+          return bookingsCache.data || [];
+        } finally {
+          calendarSpinner.classList.remove('show');
+          bookingsInFlight = null;
+        }
+      })();
+
+      return bookingsInFlight;
+    }
+
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -1241,7 +1356,7 @@
       if (checkOutInput.value && checkOutInput.value <= checkInInput.value) {
         checkOutInput.value = '';
       }
-      renderCalendar();
+      loadBookings(false).finally(() => renderCalendar());
     });
 
     checkOutInput.addEventListener('change', () => {
@@ -1249,19 +1364,8 @@
     });
 
     async function getBookings() {
-      if (BACKEND_CONFIG.backend === 'googleSheets') {
-        const sheetsBookings = await getGoogleSheetsBookings();
-        if (sheetsBookings.length > 0) {
-          return sheetsBookings;
-        }
-      }
-      
-      try {
-        const result = await window.storage.get('tasman-bookings', true);
-        return result ? JSON.parse(result.value) : [];
-      } catch {
-        return [];
-      }
+      // Kept for backwards compatibility; calendar uses the cached loader.
+      return await loadBookings(false);
     }
 
     async function saveBooking(booking) {
@@ -1277,10 +1381,26 @@
     }
 
     let currentDate = new Date();
+    let renderToken = 0;
     currentDate.setDate(1);
 
     async function renderCalendar() {
-      const bookings = await getBookings();
+      const token = ++renderToken;
+      const bookings = await loadBookings(false);
+      if (token !== renderToken) return; // Ignore stale renders
+
+      // Precompute booked dates for fast lookups + contiguous range styling
+      const bookedSet = new Set();
+      for (const b of bookings) {
+        if (!b || !b.checkIn || !b.checkOut) continue;
+        let d = b.checkIn;
+        const end = b.checkOut;
+        // inclusive for display
+        while (d <= end) {
+          bookedSet.add(d);
+          d = addDaysISO(d, 1);
+        }
+      }
       const month = currentDate.getMonth();
       const year = currentDate.getFullYear();
       const firstDay = new Date(year, month, 1).getDay();
@@ -1294,10 +1414,12 @@
         calendarGrid.removeChild(calendarGrid.lastChild);
       }
 
+      const frag = document.createDocumentFragment();
+
       for (let i = 0; i < firstDay; i++) {
         const emptyDay = document.createElement('div');
         emptyDay.className = 'calendar-day empty';
-        calendarGrid.appendChild(emptyDay);
+        frag.appendChild(emptyDay);
       }
 
       const checkInDate = checkInInput.value;
@@ -1305,10 +1427,9 @@
 
       for (let day = 1; day <= daysInMonth; day++) {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const dayDate = new Date(dateStr);
-        dayDate.setHours(0, 0, 0, 0);
+        const dayDate = parseISODate(dateStr);
         const isPast = dayDate < today;
-        const isBooked = bookings.some(b => dateStr >= b.checkIn && dateStr < b.checkOut);
+        const isBooked = bookedSet.has(dateStr);
 
         const dayElem = document.createElement('div');
         dayElem.className = 'calendar-day';
@@ -1318,20 +1439,35 @@
         if (isPast) {
           dayElem.classList.add('past');
         } else if (isBooked) {
+          // Range bar classes for booked dates
+          const bookedPrev = bookedSet.has(addDaysISO(dateStr, -1));
+          const bookedNext = bookedSet.has(addDaysISO(dateStr, 1));
+          if (!bookedPrev) dayElem.classList.add('range-start');
+          if (!bookedNext) dayElem.classList.add('range-end');
+          if (bookedPrev && bookedNext) dayElem.classList.add('range-middle');
+
           dayElem.classList.add('booked');
           dayElem.title = 'Already booked';
         } else {
           dayElem.classList.add('available');
-          
-          if (dateStr === checkInDate) {
-            dayElem.classList.add('selected');
-            dayElem.title = 'Check-in';
-          } else if (dateStr === checkOutDate) {
-            dayElem.classList.add('selected');
-            dayElem.title = 'Check-out';
-          } else if (checkInDate && checkOutDate && dateStr > checkInDate && dateStr < checkOutDate) {
-            dayElem.classList.add('in-range');
-            dayElem.title = 'Selected range';
+
+          const inSelectedRange = (checkInDate && checkOutDate && dateStr >= checkInDate && dateStr <= checkOutDate);
+
+          if (inSelectedRange) {
+            // Range bar classes
+            const prevInRange = (checkInDate && checkOutDate && addDaysISO(dateStr, -1) >= checkInDate && addDaysISO(dateStr, -1) <= checkOutDate);
+            const nextInRange = (checkInDate && checkOutDate && addDaysISO(dateStr, 1) >= checkInDate && addDaysISO(dateStr, 1) <= checkOutDate);
+            if (!prevInRange) dayElem.classList.add('range-start');
+            if (!nextInRange) dayElem.classList.add('range-end');
+            if (prevInRange && nextInRange) dayElem.classList.add('range-middle');
+
+            if (dateStr === checkInDate || dateStr === checkOutDate) {
+              dayElem.classList.add('selected');
+              dayElem.title = (dateStr === checkInDate) ? 'Check-in' : 'Check-out';
+            } else {
+              dayElem.classList.add('in-range');
+              dayElem.title = 'Selected range';
+            }
           }
 
           dayElem.addEventListener('click', function() {
@@ -1339,8 +1475,10 @@
           });
         }
 
-        calendarGrid.appendChild(dayElem);
+        frag.appendChild(dayElem);
       }
+
+      calendarGrid.appendChild(frag);
 
       prevMonthBtn.disabled = currentDate.getMonth() === new Date().getMonth() && 
                               currentDate.getFullYear() === new Date().getFullYear();
@@ -1378,11 +1516,6 @@
       currentDate.setMonth(currentDate.getMonth() + 1);
       renderCalendar();
     });
-
-    const BACKEND_CONFIG = {
-      googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbzhyPFz_m3q5c_ldWhhodTIIk8ApXImz_Y8zHCZ8TaCUGY5g9dRI0wVDwO_RjVkXA98/exec',
-      backend: 'googleSheets'
-    };
 
     bookingForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1422,6 +1555,7 @@
         statusMessage.className = 'status-message success show';
         bookingForm.reset();
         
+        await loadBookings(true);
         await renderCalendar();
         
         statusMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1449,20 +1583,7 @@
     }
 
     async function getGoogleSheetsBookings() {
-      if (!BACKEND_CONFIG.googleSheetsUrl || BACKEND_CONFIG.googleSheetsUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-        return [];
-      }
-      
-      try {
-        const response = await fetch(BACKEND_CONFIG.googleSheetsUrl);
-        if (response.ok) {
-          return await response.json();
-        }
-      } catch (error) {
-        console.error('Failed to load bookings from Google Sheets:', error);
-      }
-      
-      return [];
+      return await loadBookings(false);
     }
 
     document.getElementById('year').textContent = new Date().getFullYear();
