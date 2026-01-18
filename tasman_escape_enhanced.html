@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tasman Escape | Eco-Friendly Retreat on Tasmania's Tasman Peninsula</title>
+  <meta name="description" content="Experience Tasmania's breathtaking Tasman Peninsula from your eco-friendly retreat. Explore pristine beaches, dramatic cliffs, and rich convict history.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --dark-ocean: #0a1628;
+      --ocean-blue: #1a2f4a;
+      --sand: #d4b16a;
+      --sand-light: #e6c78a;
+      --white: #ffffff;
+      --light-grey: #f5f5f5;
+      --text-dark: #1a1a1a;
+      --text-light: #f5f5f5;
+      --text-muted: #93a7b5;
+      --card-bg: #1c3040;
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-light);
+      background: var(--dark-ocean);
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 22, 40, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: transform 0.3s;
+    }
+
+    header.hidden {
+      transform: translateY(-100%);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--sand);
+      text-decoration: none;
+    }
+
+    .logo svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--sand);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .btn-book {
+      background: var(--sand);
+      color: var(--dark-ocean);
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-book:hover {
+      background: var(--sand-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 177, 106, 0.3);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a1628 0%, #1a2f4a 100%);
+      z-index: 1;
+    }
+
+    .hero-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--sand);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 20s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-30px) translateX(20px); }
+      50% { transform: translateY(-60px) translateX(-20px); }
+      75% { transform: translateY(-30px) translateX(20px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--white) 0%, var(--sand) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--sand);
+      color: var(--dark-ocean);
+    }
+
+    .btn-primary:hover {
+      background: var(--sand-light);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(212, 177, 106, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--sand);
+      border: 2px solid var(--sand);
+    }
+
+    .btn-secondary:hover {
+      background: var(--sand);
+      color: var(--dark-ocean);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .section-alt {
+      background: var(--ocean-blue);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+      color: var(--sand);
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--sand) 0%, var(--sand-light) 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--sand);
+    }
+
+    .feature-card ul {
+      list-style: none;
+      color: var(--text-muted);
+    }
+
+    .feature-card li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .feature-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--sand);
+      font-weight: bold;
+    }
+
+    /* Activities */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .activity-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .activity-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 40px var(--shadow);
+    }
+
+    .activity-image {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--card-bg) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .activity-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(10, 22, 40, 0.8), transparent);
+    }
+
+    .activity-content {
+      padding: 2rem;
+    }
+
+    .activity-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--sand);
+    }
+
+    .activity-content p {
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Booking System */
+    .booking-container {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 3rem;
+      border: 1px solid var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      color: var(--sand);
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-light);
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--sand);
+      box-shadow: 0 0 0 3px rgba(212, 177, 106, 0.1);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      margin: 2rem 0;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
+    }
+
+    .calendar-day.available {
+      background: rgba(212, 177, 106, 0.1);
+      color: var(--sand);
+    }
+
+    .calendar-day.available:hover {
+      background: var(--sand);
+      color: var(--dark-ocean);
+    }
+
+    .calendar-day.booked {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    .calendar-day.selected {
+      background: var(--sand);
+      color: var(--dark-ocean);
+      font-weight: bold;
+    }
+
+    .calendar-header {
+      font-weight: 600;
+      color: var(--sand);
+      padding: 1rem 0;
+    }
+
+    .availability-legend {
+      display: flex;
+      gap: 2rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* Map */
+    .map-container {
+      height: 500px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      box-shadow: 0 10px 40px var(--shadow);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--card-bg) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px var(--shadow);
+    }
+
+    .gallery-item::after {
+      content: attr(data-caption);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(10, 22, 40, 0.9), transparent);
+      font-size: 1rem;
+      color: var(--white);
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover::after {
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-ocean);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 1rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      color: var(--sand);
+      margin-bottom: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: block;
+      padding: 0.3rem 0;
+    }
+
+    .footer-section a:hover {
+      color: var(--sand);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--sand);
+      color: var(--dark-ocean);
+      transform: translateY(-3px);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: var(--dark-ocean);
+        flex-direction: column;
+        padding: 5rem 2rem;
+        transition: right 0.3s;
+        align-items: flex-start;
+        border-left: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .activities-grid,
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-container {
+        padding: 1.5rem;
+      }
+
+      .calendar-day {
+        font-size: 0.75rem;
+      }
+    }
+
+    /* Status Messages */
+    .status-message {
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      display: none;
+    }
+
+    .status-message.show {
+      display: block;
+    }
+
+    .status-message.success {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      color: #4caf50;
+    }
+
+    .status-message.error {
+      background: rgba(244, 67, 54, 0.1);
+      border: 1px solid rgba(244, 67, 54, 0.3);
+      color: #f44336;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--sand);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 2rem auto;
+      display: none;
+    }
+
+    .spinner.show {
+      display: block;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          Tasman Escape
+        </a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#stay">The Stay</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#book" class="btn-book">Book Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-particles" id="particles"></div>
+    </div>
+    <div class="hero-content container">
+      <h1>Discover Tasmania's Hidden Paradise</h1>
+      <p>Your eco-friendly retreat on the stunning Tasman Peninsula • Where wilderness meets comfort</p>
+      <div class="hero-cta">
+        <a href="#book" class="btn btn-primary">Book Your Escape</a>
+        <a href="#stay" class="btn btn-secondary">Explore More</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="stay">
+    <div class="container">
+      <div class="section-header">
+        <h2>Your Tasman Retreat</h2>
+        <p>Thoughtfully designed for comfort, adventure, and unforgettable experiences</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🏡</div>
+          <h3>Comfort & Calm</h3>
+          <p>A peaceful sanctuary with all the essentials for a perfect getaway.</p>
+          <ul>
+            <li>Premium bedding & linens</li>
+            <li>Climate control heating/cooling</li>
+            <li>Board games & local books</li>
+            <li>Private & quiet setting</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🍳</div>
+          <h3>Fully Equipped Kitchen</h3>
+          <p>Everything you need for your morning coffee ritual and hearty meals.</p>
+          <ul>
+            <li>Modern appliances & cookware</li>
+            <li>Coffee & tea station</li>
+            <li>Outdoor dining area</li>
+            <li>BBQ facilities</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3>Stay Connected</h3>
+          <p>Perfect for digital detox or remote work—your choice.</p>
+          <ul>
+            <li>High-speed Wi-Fi</li>
+            <li>Dedicated workspace</li>
+            <li>Local guides & maps</li>
+            <li>Streaming entertainment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="activities" class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Tasmania's Natural Wonders</h2>
+        <p>Explore dramatic coastlines, pristine beaches, and rich history around Nubeena</p>
+      </div>
+      <div class="activities-grid">
+        <div class="activity-card">
+          <div class="activity-image">🏄</div>
+          <div class="activity-content">
+            <h3>Roaring Beach</h3>
+            <p>Experience wild surf and pristine sand dunes. The only surfing beach on the west coast of Tasman Peninsula, perfect for sunset walks and watching surfers ride powerful swells. Access via scenic gravel road from Nubeena.</p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">🥾</div>
+          <div class="activity-content">
+            <h3>Cape Raoul</h3>
+            <p>Hike through eucalypt forest to towering 300m dolerite cliffs. The 7km track in Tasman National Park offers sweeping ocean views and dramatic geological formations. One of Tasmania's most spectacular coastal walks.</p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">🏖️</div>
+          <div class="activity-content">
+            <h3>White Beach</h3>
+            <p>A sheltered 3km bay with calm, shallow waters ideal for families. Perfect for swimming, kayaking, and picnics. Features jetty, boat ramp, and views of Brother and Sister Islands. Very low hazard rating makes it perfect for all ages.</p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">🏛️</div>
+          <div class="activity-content">
+            <h3>Port Arthur Historic Site</h3>
+            <p>Step back in time at this UNESCO World Heritage site. Explore well-preserved convict ruins, immersive museum exhibits, and learn about Tasmania's fascinating colonial history through guided tours and ghost walks.</p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">🌊</div>
+          <div class="activity-content">
+            <h3>Tasman Arch</h3>
+            <p>Marvel at nature's power at this soaring natural bridge carved by ocean waves. Walk to Devil's Kitchen, a dramatic collapsed sea cave. Easy access from car park with spectacular clifftop views.</p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">🎨</div>
+          <div class="activity-content">
+            <h3>Local Arts & Dining</h3>
+            <p>Discover artists' studios, boutique galleries, and fresh Tasmanian produce. Sample local wines, craft beers, and seafood at nearby eateries. Experience authentic Tasmanian hospitality and creativity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <h2>Tasman Peninsula Gallery</h2>
+        <p>Glimpses of the stunning landscapes awaiting your discovery</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-caption="Dramatic Coastal Cliffs">🌊</div>
+        <div class="gallery-item" data-caption="Tasman Arch Natural Bridge">🏔️</div>
+        <div class="gallery-item" data-caption="Roaring Beach Sunset">🌅</div>
+        <div class="gallery-item" data-caption="White Beach Paradise">🏖️</div>
+        <div class="gallery-item" data-caption="Cape Raoul Lookout">⛰️</div>
+        <div class="gallery-item" data-caption="Port Arthur Heritage">🏛️</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="location" class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Find Us in Nubeena</h2>
+        <p>Perfectly positioned to explore Tasmania's most spectacular coastline</p>
+      </div>
+      <div class="map-container">
+        <iframe 
+          src="https://maps.google.com/maps?q=120%20Tip%20Road%20Nubeena%20Tasmania&t=h&z=14&output=embed"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="features-grid" style="margin-top: 3rem;">
+        <div class="feature-card">
+          <div class="feature-icon">✈️</div>
+          <h3>Getting Here</h3>
+          <ul>
+            <li>90 minutes from Hobart Airport</li>
+            <li>Scenic coastal drive included</li>
+            <li>Car recommended for exploration</li>
+            <li>Detailed directions provided</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌦️</div>
+          <h3>Weather & Packing</h3>
+          <ul>
+            <li>Four seasons in one day</li>
+            <li>Layered clothing essential</li>
+            <li>Waterproof jacket recommended</li>
+            <li>Sunscreen year-round</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📍</div>
+          <h3>Nearby Essentials</h3>
+          <ul>
+            <li>Nubeena township (5 min)</li>
+            <li>Port Arthur (15 min)</li>
+            <li>Supermarket & cafes close</li>
+            <li>National park access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="container">
+      <div class="section-header">
+        <h2>Book Your Tasman Escape</h2>
+        <p>Check availability and secure your dates for an unforgettable experience</p>
+      </div>
+      <div class="booking-container">
+        <div class="availability-legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background: rgba(212, 177, 106, 0.1); border-color: var(--sand);"></div>
+            <span>Available</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: rgba(255, 255, 255, 0.05);"></div>
+            <span>Booked</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--sand);"></div>
+            <span>Selected</span>
+          </div>
+        </div>
+
+        <div id="calendar"></div>
+
+        <form id="bookingForm">
+          <div class="booking-grid">
+            <div class="form-group">
+              <label for="checkIn">Check-in Date</label>
+              <input type="date" id="checkIn" required>
+            </div>
+            <div class="form-group">
+              <label for="checkOut">Check-out Date</label>
+              <input type="date" id="checkOut" required>
+            </div>
+            <div class="form-group">
+              <label for="guests">Number of Guests</label>
+              <select id="guests" required>
+                <option value="">Select guests</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Special Requests (Optional)</label>
+            <textarea id="message" rows="4" placeholder="Any special requirements or questions?"></textarea>
+          </div>
+
+          <div class="status-message" id="statusMessage"></div>
+          <div class="spinner" id="spinner"></div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Request Booking
+          </button>
+
+          <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem;">
+            You'll receive a confirmation email within 24 hours
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Tasman Escape</h3>
+          <p style="color: var(--text-muted); margin-top: 0.5rem;">
+            Your eco-friendly retreat on Tasmania's stunning Tasman Peninsula.
+          </p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/damndagnall/" target="_blank" rel="noopener">
+              📷
+            </a>
+            <a href="#book">
+              ✉️
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#stay">The Stay</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#book">Book Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Top Attractions</h3>
+          <ul>
+            <li><a href="#activities">Roaring Beach</a></li>
+            <li><a href="#activities">Cape Raoul</a></li>
+            <li><a href="#activities">White Beach</a></li>
+            <li><a href="#activities">Port Arthur</a></li>
+            <li><a href="#activities">Tasman Arch</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul>
+            <li>120 Tip Road, Nubeena</li>
+            <li>Tasmania, Australia</li>
+            <li><a href="https://www.instagram.com/damndagnall/">@damndagnall</a></li>
+            <li><a href="#book">Book Direct</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Tasman Escape. All rights reserved. | Designed for adventure, built for comfort.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.textContent = '☰';
+      });
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = 80;
+          const targetPosition = target.offsetTop - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Hide header on scroll down, show on scroll up
+    let lastScroll = 0;
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add('hidden');
+      } else {
+        header.classList.remove('hidden');
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // Animated particles in hero
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.width = Math.random() * 4 + 2 + 'px';
+      particle.style.height = particle.style.width;
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 20 + 's';
+      particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+      particlesContainer.appendChild(particle);
+    }
+
+    // Booking System with Persistent Storage
+    const bookingForm = document.getElementById('bookingForm');
+    const checkInInput = document.getElementById('checkIn');
+    const checkOutInput = document.getElementById('checkOut');
+    const statusMessage = document.getElementById('statusMessage');
+    const spinner = document.getElementById('spinner');
+
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    checkInInput.min = today;
+    checkOutInput.min = today;
+
+    // Update checkout min date when checkin changes
+    checkInInput.addEventListener('change', () => {
+      checkOutInput.min = checkInInput.value;
+      if (checkOutInput.value && checkOutInput.value <= checkInInput.value) {
+        checkOutInput.value = '';
+      }
+    });
+
+    // Simulated booking data (in production, this would come from your backend)
+    async function getBookings() {
+      // If using Google Sheets, fetch from there
+      if (BACKEND_CONFIG.backend === 'googleSheets') {
+        const sheetsBookings = await getGoogleSheetsBookings();
+        if (sheetsBookings.length > 0) {
+          return sheetsBookings;
+        }
+      }
+      
+      // Otherwise use local storage
+      try {
+        const result = await window.storage.get('tasman-bookings', true);
+        return result ? JSON.parse(result.value) : [];
+      } catch {
+        return [];
+      }
+    }
+
+    async function saveBooking(booking) {
+      try {
+        const bookings = await getBookings();
+        bookings.push(booking);
+        await window.storage.set('tasman-bookings', JSON.stringify(bookings), true);
+        return true;
+      } catch (error) {
+        console.error('Failed to save booking:', error);
+        return false;
+      }
+    }
+
+    // Generate calendar
+    async function generateCalendar() {
+      const calendar = document.getElementById('calendar');
+      const bookings = await getBookings();
+      
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+      
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth();
+      const currentYear = currentDate.getFullYear();
+      
+      let calendarHTML = '<div style="margin-bottom: 2rem;">';
+      
+      // Generate 3 months
+      for (let monthOffset = 0; monthOffset < 3; monthOffset++) {
+        const date = new Date(currentYear, currentMonth + monthOffset, 1);
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        calendarHTML += `
+          <div style="margin-bottom: 2rem;">
+            <h3 style="text-align: center; color: var(--sand); margin-bottom: 1rem;">
+              ${monthNames[month]} ${year}
+            </h3>
+            <div class="calendar-grid">
+              <div class="calendar-header">Sun</div>
+              <div class="calendar-header">Mon</div>
+              <div class="calendar-header">Tue</div>
+              <div class="calendar-header">Wed</div>
+              <div class="calendar-header">Thu</div>
+              <div class="calendar-header">Fri</div>
+              <div class="calendar-header">Sat</div>
+        `;
+        
+        // Empty cells before first day
+        for (let i = 0; i < firstDay; i++) {
+          calendarHTML += '<div class="calendar-day"></div>';
+        }
+        
+        // Days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+          const isPast = new Date(dateStr) < new Date(today);
+          const isBooked = bookings.some(b => dateStr >= b.checkIn && dateStr < b.checkOut);
+          
+          let className = 'calendar-day';
+          if (isPast || isBooked) {
+            className += ' booked';
+          } else {
+            className += ' available';
+          }
+          
+          calendarHTML += `<div class="${className}" data-date="${dateStr}">${day}</div>`;
+        }
+        
+        calendarHTML += '</div></div>';
+      }
+      
+      calendarHTML += '</div>';
+      calendar.innerHTML = calendarHTML;
+      
+      // Add click handlers to available days
+      document.querySelectorAll('.calendar-day.available').forEach(day => {
+        day.addEventListener('click', function() {
+          const date = this.dataset.date;
+          if (!checkInInput.value) {
+            checkInInput.value = date;
+            document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
+            this.classList.add('selected');
+          } else if (!checkOutInput.value && date > checkInInput.value) {
+            checkOutInput.value = date;
+            this.classList.add('selected');
+          } else {
+            checkInInput.value = date;
+            checkOutInput.value = '';
+            document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
+            this.classList.add('selected');
+          }
+        });
+      });
+    }
+
+    // Initialize calendar
+    generateCalendar();
+
+    // CONFIGURATION - Use Google Sheets for security
+    const BACKEND_CONFIG = {
+      // Google Apps Script Web App URL
+      googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbzhyPFz_m3q5c_ldWhhodTIIk8ApXImz_Y8zHCZ8TaCUGY5g9dRI0wVDwO_RjVkXA98/exec',
+      
+      // Use Google Sheets for secure, private bookings
+      backend: 'googleSheets'
+    };
+
+    // Handle form submission
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        checkIn: checkInInput.value,
+        checkOut: checkOutInput.value,
+        guests: document.getElementById('guests').value,
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        message: document.getElementById('message').value,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Show loading
+      spinner.classList.add('show');
+      statusMessage.classList.remove('show');
+      
+      let success = false;
+      let errorMessage = 'Unable to process booking. Please try again.';
+      
+      try {
+        // Send to secure Google Sheets backend
+        success = await sendToGoogleSheets(formData);
+      } catch (error) {
+        console.error('Booking error:', error);
+        errorMessage = error.message || errorMessage;
+      }
+      
+      spinner.classList.remove('show');
+      
+      if (success) {
+        statusMessage.innerHTML = `
+          <strong>✅ Booking request received!</strong><br>
+          We'll confirm your stay from ${formData.checkIn} to ${formData.checkOut} within 24 hours.<br>
+          <small>Confirmation sent to <strong>${formData.email}</strong></small>
+        `;
+        statusMessage.className = 'status-message success show';
+        bookingForm.reset();
+        
+        // Regenerate calendar with fresh data from Google Sheets
+        await generateCalendar();
+        
+        // Scroll to message
+        statusMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        statusMessage.textContent = errorMessage;
+        statusMessage.className = 'status-message error show';
+      }
+    });
+
+    // Google Sheets integration
+    async function sendToGoogleSheets(data) {
+      if (!BACKEND_CONFIG.googleSheetsUrl || BACKEND_CONFIG.googleSheetsUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        throw new Error('Google Sheets URL not configured');
+      }
+      
+      const response = await fetch(BACKEND_CONFIG.googleSheetsUrl, {
+        method: 'POST',
+        mode: 'no-cors', // Required for Google Apps Script
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+      
+      // Note: no-cors mode doesn't allow reading response, so we assume success
+      return true;
+    }
+
+    // Load bookings from Google Sheets
+    async function getGoogleSheetsBookings() {
+      if (!BACKEND_CONFIG.googleSheetsUrl || BACKEND_CONFIG.googleSheetsUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        return [];
+      }
+      
+      try {
+        const response = await fetch(BACKEND_CONFIG.googleSheetsUrl);
+        if (response.ok) {
+          return await response.json();
+        }
+      } catch (error) {
+        console.error('Failed to load bookings from Google Sheets:', error);
+      }
+      
+      return [];
+    }
+
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards and sections
+    document.querySelectorAll('.feature-card, .activity-card, .gallery-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
