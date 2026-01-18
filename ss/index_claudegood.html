@@ -361,19 +361,13 @@
     .activity-image {
       width: 100%;
       height: 250px;
+      background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--card-bg) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
       position: relative;
       overflow: hidden;
-    }
-
-    .activity-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .activity-card:hover .activity-image img {
-      transform: scale(1.1);
     }
 
     .activity-image::after {
@@ -449,42 +443,6 @@
       box-shadow: 0 0 0 3px rgba(212, 177, 106, 0.1);
     }
 
-    .calendar-container {
-      margin-bottom: 2rem;
-    }
-
-    .calendar-navigation {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .calendar-month {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--sand);
-    }
-
-    .btn-nav {
-      background: transparent;
-      border: none;
-      color: var(--sand);
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      transition: color 0.3s;
-    }
-
-    .btn-nav:hover {
-      color: var(--sand-light);
-    }
-
-    .btn-nav:disabled {
-      color: var(--text-muted);
-      cursor: not-allowed;
-    }
-
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -524,12 +482,6 @@
       background: var(--sand);
       color: var(--dark-ocean);
       font-weight: bold;
-    }
-
-    .calendar-day.past {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-      cursor: not-allowed;
     }
 
     .calendar-header {
@@ -585,20 +537,19 @@
       aspect-ratio: 4/3;
       border-radius: 12px;
       overflow: hidden;
+      background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--card-bg) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
       position: relative;
       cursor: pointer;
       transition: all 0.3s;
     }
 
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.1);
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px var(--shadow);
     }
 
     .gallery-item::after {
@@ -866,54 +817,42 @@
       </div>
       <div class="activities-grid">
         <div class="activity-card">
-          <div class="activity-image">
-            <img src="images/roaring-beach.jpg" alt="Roaring Beach" loading="lazy">
-          </div>
+          <div class="activity-image">🏄</div>
           <div class="activity-content">
             <h3>Roaring Beach</h3>
             <p>Experience wild surf and pristine sand dunes. The only surfing beach on the west coast of Tasman Peninsula, perfect for sunset walks and watching surfers ride powerful swells. Access via scenic gravel road from Nubeena.</p>
           </div>
         </div>
         <div class="activity-card">
-          <div class="activity-image">
-            <img src="images/cape-raoul.jpg" alt="Cape Raoul" loading="lazy">
-          </div>
+          <div class="activity-image">🥾</div>
           <div class="activity-content">
             <h3>Cape Raoul</h3>
             <p>Hike through eucalypt forest to towering 300m dolerite cliffs. The 7km track in Tasman National Park offers sweeping ocean views and dramatic geological formations. One of Tasmania's most spectacular coastal walks.</p>
           </div>
         </div>
         <div class="activity-card">
-          <div class="activity-image">
-            <img src="images/white-beach.jpg" alt="White Beach" loading="lazy">
-          </div>
+          <div class="activity-image">🏖️</div>
           <div class="activity-content">
             <h3>White Beach</h3>
             <p>A sheltered 3km bay with calm, shallow waters ideal for families. Perfect for swimming, kayaking, and picnics. Features jetty, boat ramp, and views of Brother and Sister Islands. Very low hazard rating makes it perfect for all ages.</p>
           </div>
         </div>
         <div class="activity-card">
-          <div class="activity-image">
-            <img src="images/port-arthur.jpg" alt="Port Arthur Historic Site" loading="lazy">
-          </div>
+          <div class="activity-image">🏛️</div>
           <div class="activity-content">
             <h3>Port Arthur Historic Site</h3>
             <p>Step back in time at this UNESCO World Heritage site. Explore well-preserved convict ruins, immersive museum exhibits, and learn about Tasmania's fascinating colonial history through guided tours and ghost walks.</p>
           </div>
         </div>
         <div class="activity-card">
-          <div class="activity-image">
-            <img src="images/tasman-arch.jpg" alt="Tasman Arch" loading="lazy">
-          </div>
+          <div class="activity-image">🌊</div>
           <div class="activity-content">
             <h3>Tasman Arch</h3>
             <p>Marvel at nature's power at this soaring natural bridge carved by ocean waves. Walk to Devil's Kitchen, a dramatic collapsed sea cave. Easy access from car park with spectacular clifftop views.</p>
           </div>
         </div>
         <div class="activity-card">
-          <div class="activity-image">
-            <img src="images/local-arts-dining.jpg" alt="Local Arts & Dining" loading="lazy">
-          </div>
+          <div class="activity-image">🎨</div>
           <div class="activity-content">
             <h3>Local Arts & Dining</h3>
             <p>Discover artists' studios, boutique galleries, and fresh Tasmanian produce. Sample local wines, craft beers, and seafood at nearby eateries. Experience authentic Tasmanian hospitality and creativity.</p>
@@ -930,24 +869,12 @@
         <p>Glimpses of the stunning landscapes awaiting your discovery</p>
       </div>
       <div class="gallery-grid">
-        <div class="gallery-item" data-caption="Dramatic Coastal Cliffs">
-          <img src="images/coastal-cliffs.jpg" alt="Dramatic Coastal Cliffs" loading="lazy">
-        </div>
-        <div class="gallery-item" data-caption="Tasman Arch Natural Bridge">
-          <img src="images/tasman-arch-natural.jpg" alt="Tasman Arch Natural Bridge" loading="lazy">
-        </div>
-        <div class="gallery-item" data-caption="Roaring Beach Sunset">
-          <img src="images/roaring-beach-sunset.jpg" alt="Roaring Beach Sunset" loading="lazy">
-        </div>
-        <div class="gallery-item" data-caption="White Beach Paradise">
-          <img src="images/white-beach-paradise.jpg" alt="White Beach Paradise" loading="lazy">
-        </div>
-        <div class="gallery-item" data-caption="Cape Raoul Lookout">
-          <img src="images/cape-raoul-lookout.jpg" alt="Cape Raoul Lookout" loading="lazy">
-        </div>
-        <div class="gallery-item" data-caption="Port Arthur Heritage">
-          <img src="images/port-arthur-heritage.jpg" alt="Port Arthur Heritage" loading="lazy">
-        </div>
+        <div class="gallery-item" data-caption="Dramatic Coastal Cliffs">🌊</div>
+        <div class="gallery-item" data-caption="Tasman Arch Natural Bridge">🏔️</div>
+        <div class="gallery-item" data-caption="Roaring Beach Sunset">🌅</div>
+        <div class="gallery-item" data-caption="White Beach Paradise">🏖️</div>
+        <div class="gallery-item" data-caption="Cape Raoul Lookout">⛰️</div>
+        <div class="gallery-item" data-caption="Port Arthur Heritage">🏛️</div>
       </div>
     </div>
   </section>
@@ -1022,22 +949,7 @@
           </div>
         </div>
 
-        <div class="calendar-container">
-          <div class="calendar-navigation">
-            <button class="btn-nav" id="prevMonth">&lt;</button>
-            <span class="calendar-month" id="currentMonth"></span>
-            <button class="btn-nav" id="nextMonth">&gt;</button>
-          </div>
-          <div id="calendarGrid" class="calendar-grid">
-            <div class="calendar-header">Sun</div>
-            <div class="calendar-header">Mon</div>
-            <div class="calendar-header">Tue</div>
-            <div class="calendar-header">Wed</div>
-            <div class="calendar-header">Thu</div>
-            <div class="calendar-header">Fri</div>
-            <div class="calendar-header">Sat</div>
-          </div>
-        </div>
+        <div id="calendar"></div>
 
         <form id="bookingForm">
           <div class="booking-grid">
@@ -1221,10 +1133,6 @@
     const checkOutInput = document.getElementById('checkOut');
     const statusMessage = document.getElementById('statusMessage');
     const spinner = document.getElementById('spinner');
-    const prevMonthBtn = document.getElementById('prevMonth');
-    const nextMonthBtn = document.getElementById('nextMonth');
-    const currentMonthSpan = document.getElementById('currentMonth');
-    const calendarGrid = document.getElementById('calendarGrid');
 
     // Set minimum date to today
     const today = new Date().toISOString().split('T')[0];
@@ -1270,59 +1178,70 @@
       }
     }
 
-    // Calendar navigation
-    let currentDate = new Date();
-    currentDate.setDate(1); // Start of current month
-
-    async function renderCalendar() {
+    // Generate calendar
+    async function generateCalendar() {
+      const calendar = document.getElementById('calendar');
       const bookings = await getBookings();
-      const month = currentDate.getMonth();
-      const year = currentDate.getFullYear();
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      
       const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
-
-      currentMonthSpan.textContent = `${monthNames[month]} ${year}`;
-
-      // Clear days (keep headers)
-      while (calendarGrid.children.length > 7) {
-        calendarGrid.removeChild(calendarGrid.lastChild);
-      }
-
-      // Empty cells before first day
-      for (let i = 0; i < firstDay; i++) {
-        const emptyDay = document.createElement('div');
-        emptyDay.className = 'calendar-day';
-        calendarGrid.appendChild(emptyDay);
-      }
-
-      // Days of the month
-      for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const dayDate = new Date(dateStr);
-        const isPast = dayDate < new Date(today);
-        const isBooked = bookings.some(b => dateStr >= b.checkIn && dateStr < b.checkOut);
-
-        const dayElem = document.createElement('div');
-        dayElem.className = 'calendar-day';
-        dayElem.textContent = day;
-        dayElem.dataset.date = dateStr;
-
-        if (isPast) {
-          dayElem.classList.add('past');
-        } else if (isBooked) {
-          dayElem.classList.add('booked');
-        } else {
-          dayElem.classList.add('available');
+      
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth();
+      const currentYear = currentDate.getFullYear();
+      
+      let calendarHTML = '<div style="margin-bottom: 2rem;">';
+      
+      // Generate 3 months
+      for (let monthOffset = 0; monthOffset < 3; monthOffset++) {
+        const date = new Date(currentYear, currentMonth + monthOffset, 1);
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        calendarHTML += `
+          <div style="margin-bottom: 2rem;">
+            <h3 style="text-align: center; color: var(--sand); margin-bottom: 1rem;">
+              ${monthNames[month]} ${year}
+            </h3>
+            <div class="calendar-grid">
+              <div class="calendar-header">Sun</div>
+              <div class="calendar-header">Mon</div>
+              <div class="calendar-header">Tue</div>
+              <div class="calendar-header">Wed</div>
+              <div class="calendar-header">Thu</div>
+              <div class="calendar-header">Fri</div>
+              <div class="calendar-header">Sat</div>
+        `;
+        
+        // Empty cells before first day
+        for (let i = 0; i < firstDay; i++) {
+          calendarHTML += '<div class="calendar-day"></div>';
         }
-
-        calendarGrid.appendChild(dayElem);
+        
+        // Days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+          const isPast = new Date(dateStr) < new Date(today);
+          const isBooked = bookings.some(b => dateStr >= b.checkIn && dateStr < b.checkOut);
+          
+          let className = 'calendar-day';
+          if (isPast || isBooked) {
+            className += ' booked';
+          } else {
+            className += ' available';
+          }
+          
+          calendarHTML += `<div class="${className}" data-date="${dateStr}">${day}</div>`;
+        }
+        
+        calendarHTML += '</div></div>';
       }
-
-      // Disable prev button if current month
-      prevMonthBtn.disabled = currentDate.getMonth() === new Date().getMonth() && currentDate.getFullYear() === new Date().getFullYear();
-
+      
+      calendarHTML += '</div>';
+      calendar.innerHTML = calendarHTML;
+      
       // Add click handlers to available days
       document.querySelectorAll('.calendar-day.available').forEach(day => {
         day.addEventListener('click', function() {
@@ -1344,20 +1263,8 @@
       });
     }
 
-    // Initial render
-    renderCalendar();
-
-    prevMonthBtn.addEventListener('click', () => {
-      if (!prevMonthBtn.disabled) {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
-      }
-    });
-
-    nextMonthBtn.addEventListener('click', () => {
-      currentDate.setMonth(currentDate.getMonth() + 1);
-      renderCalendar();
-    });
+    // Initialize calendar
+    generateCalendar();
 
     // CONFIGURATION - Use Google Sheets for security
     const BACKEND_CONFIG = {
@@ -1410,7 +1317,7 @@
         bookingForm.reset();
         
         // Regenerate calendar with fresh data from Google Sheets
-        await renderCalendar();
+        await generateCalendar();
         
         // Scroll to message
         statusMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
